@@ -11,8 +11,9 @@ set(CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
 # Source files
 set (
 	SOURCE_FILES
+	src/game.cpp
+	src/game.h
 	src/main.cpp
-	# ...
 )
 
 # Packages
