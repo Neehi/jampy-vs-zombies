@@ -3,9 +3,13 @@
 #define GAME_H
 
 #include <cstddef>
+#include <memory>
 #include <string>
+#include <vector>
 
 #include <SDL.h>
+
+#include "game_state.h"
 
 class Game {
  public:
@@ -14,6 +18,8 @@ class Game {
   ~Game();
 
   void Run();
+
+  void SetGameState(std::shared_ptr<GameState> state);
 
   inline std::size_t GetScreenWidth() const { return screen_width_; }
   inline std::size_t GetScreenHeight() const { return screen_height_; }
@@ -37,6 +43,8 @@ class Game {
   std::size_t screen_height_;
 
   bool running_{false};
+
+  std::shared_ptr<GameState> current_state_{nullptr};
 };
 
 #endif

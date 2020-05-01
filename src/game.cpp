@@ -59,21 +59,33 @@ void Game::HandleEvents() {
       case SDL_QUIT:
         std::cout << "Received SDL_Quit event\n";
         running_ = false;
-        break;
+        return;
       default:
         break;
+    }
+    // Pass event to current game state
+    if (current_state_ != nullptr) {
+      current_state_->OnHandleEvent(&event);
     }
   }
 }
 
 void Game::Update() {
-  // ...
+  // Update current game state
+  if (current_state_ != nullptr) {
+    current_state_->OnUpdate();
+  }
 }
 
 void Game::Render() {
   // Clear screen
   SDL_SetRenderDrawColor(sdl_renderer_, 0xFF, 0, 0, SDL_ALPHA_OPAQUE);
   SDL_RenderClear(sdl_renderer_);
+
+  // Render current game state
+  if (current_state_ != nullptr) {
+    current_state_->OnRender(sdl_renderer_);
+  }
 
   // Update screen
   SDL_RenderPresent(sdl_renderer_);
@@ -86,5 +98,19 @@ void Game::Run() {
     Update();
     Render();
   }
+}
 
+void Game::SetGameState(std::shared_ptr<GameState> state) {
+  if (current_state_ != nullptr) {
+    if (current_state_->GetID() == state->GetID()) {
+      std::cout << "GameState: '" << state->GetID() 
+                << "' is already the current state\n";
+      return;
+    }
+    current_state_->OnExit();
+  }
+  std::cout << "GameState: Setting the current state to '" << state->GetID()
+            << "'\n";
+  current_state_ = state;
+  current_state_->OnEnter();
 }
