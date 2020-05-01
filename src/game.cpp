@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include <SDL_image.h>
+
 Game::Game(const std::size_t screen_width, const std::size_t screen_height,
            const std::string& title)
     : screen_width_(screen_width), screen_height_(screen_height) {
@@ -9,6 +11,13 @@ Game::Game(const std::size_t screen_width, const std::size_t screen_height,
   std::cout << "Initializing SDL\n";
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
     std::cerr << "Error initializing SDL: " << SDL_GetError() << "\n";
+    // TODO: Error handling
+  }
+
+  // Initialize SDL_image
+  std::cout << "Initializing SDL_image\n";
+  if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
+    std::cerr << "Error initializing SDL_image: " << IMG_GetError() << "\n";
     // TODO: Error handling
   }
 
@@ -45,6 +54,9 @@ Game::Game(const std::size_t screen_width, const std::size_t screen_height,
 }
 
 Game::~Game() {
+  // Shutdown SDL_image
+  std::cout << "Shutting down SDL_image\n";
+  IMG_Quit();
   // Shutdown SDL
   std::cout << "Shutting down SDL\n";
   SDL_DestroyRenderer(sdl_renderer_);
