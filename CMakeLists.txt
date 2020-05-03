@@ -19,6 +19,8 @@ set (
 	src/game_state.cpp
 	src/game_state.h
 	src/main.cpp
+	src/texture.cpp
+	src/texture.h
 )
 
 # Packages
