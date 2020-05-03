@@ -5,6 +5,8 @@
 
 class SandboxState : public GameState {
  public:
+  using GameState::GameState;
+
   virtual void OnHandleEvent(const SDL_Event* event) override {}
   virtual void OnUpdate() override {}
   virtual void OnRender(SDL_Renderer* renderer) override {}
@@ -19,7 +21,7 @@ const std::string SandboxState::id_ = "Sandbox";
 int main(int argc, char *argv[]) {
 
   Game* game = new Game(640, 480, "Jampy vs Zombies");
-  game->SetGameState(std::make_shared<SandboxState>());
+  game->SetGameState(std::make_shared<SandboxState>(*game));
   game->Run();
   delete game;
 
