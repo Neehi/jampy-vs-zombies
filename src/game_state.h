@@ -16,7 +16,7 @@ class GameState {
 
   virtual void OnHandleEvent(const SDL_Event* event) = 0;
   virtual void OnUpdate() = 0;
-  virtual void OnRender(const SDL_Renderer* renderer) = 0;
+  virtual void OnRender(SDL_Renderer* renderer) = 0;
 
   virtual std::string GetID() const = 0;
 };

@@ -7,7 +7,7 @@ class SandboxState : public GameState {
  public:
   virtual void OnHandleEvent(const SDL_Event* event) override {}
   virtual void OnUpdate() override {}
-  virtual void OnRender(const SDL_Renderer* renderer) override {}
+  virtual void OnRender(SDL_Renderer* renderer) override {}
   virtual std::string GetID() const override { return id_; }
 
  private:
