@@ -1,8 +1,30 @@
 #include <memory>
 
 #include "game.h"
+#include "game_object.h"
 #include "game_state.h"
 #include "texture.h"
+
+class Player : public GameObject {
+ public:
+  using GameObject::GameObject;
+  Player() : GameObject(), dx_(1), dy_(0) {}
+
+  void Update() {
+    x_ += dx_;
+    if (x_ < 0) {
+      x_ = 0;
+      dx_ = -dx_;
+    } else if (x_ > 640 - 64) {
+      x_ = 640-64;
+      dx_ = -dx_;
+    }
+  }
+
+ private:
+  float dx_{0};
+  float dy_{0};
+};
 
 class SandboxState : public GameState {
  public:
@@ -10,12 +32,13 @@ class SandboxState : public GameState {
 
   virtual void OnEnter() override;
   virtual void OnHandleEvent(const SDL_Event* event) override {}
-  virtual void OnUpdate() override {}
+  virtual void OnUpdate() override;
   virtual void OnRender(SDL_Renderer* renderer) override;
   virtual std::string GetID() const override { return id_; }
 
  private:
-  std::shared_ptr<Texture> jampy_{nullptr};
+  std::shared_ptr<Texture> tex_{nullptr};
+  std::shared_ptr<Player> jampy_ = std::make_shared<Player>();
 
  private:
   static const std::string id_;
@@ -25,18 +48,17 @@ const std::string SandboxState::id_ = "Sandbox";
 
 void SandboxState::OnEnter() {
   GameState::OnEnter();
-  jampy_ = std::make_shared<Texture>("../res/textures/Knight/knight.png", GetGame().GetSDLRenderer());
+  tex_ = std::make_shared<Texture>("../res/textures/Knight/knight.png", GetGame().GetSDLRenderer());
+  jampy_->SetTexture(tex_);
+}
+
+void SandboxState::OnUpdate() {
+  jampy_->Update();
 }
 
 void SandboxState::OnRender(SDL_Renderer* renderer) {
-  const std::size_t w = jampy_->GetWidth();
-  const std::size_t h = jampy_->GetHeight();
-  SDL_Rect dst_rect{
-      static_cast<int>(GetGame().GetScreenWidth() - w) >> 1,
-      static_cast<int>(GetGame().GetScreenHeight() -  h) >> 1,
-      static_cast<int>(w),
-      static_cast<int>(h)};
-  jampy_->Render(renderer, &dst_rect);
+  jampy_->Render(renderer);
+  SDL_Delay(5);
 }
 
 int main(int argc, char *argv[]) {
