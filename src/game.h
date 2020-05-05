@@ -3,6 +3,7 @@
 #define GAME_H
 
 #include <cstddef>
+#include <cstdint>
 #include <memory>
 #include <string>
 #include <vector>
@@ -12,6 +13,8 @@
 #include "game_state.h"
 
 class Game {
+  static const uint32_t kDefaultFrameRate = 60;
+
  public:
   Game(const std::size_t screen_width, const std::size_t screen_height,
        const std::string& title);
@@ -27,9 +30,11 @@ class Game {
   inline SDL_Window* GetSDLWindow() const { return sdl_window_; }
   inline SDL_Renderer* GetSDLRenderer() const { return sdl_renderer_; }
 
+  inline std::uint32_t GetFPS() const { return fps_; }
+
  protected:
   void HandleEvents();
-  void Update();
+  void Update(const float delta);
   void Render();
 
  private:
@@ -41,6 +46,9 @@ class Game {
   SDL_Renderer* sdl_renderer_;
   std::size_t screen_width_;
   std::size_t screen_height_;
+
+  uint32_t frame_rate_{kDefaultFrameRate};
+  uint32_t fps_{0};
 
   bool running_{false};
 

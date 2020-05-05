@@ -8,10 +8,10 @@
 class Player : public GameObject {
  public:
   using GameObject::GameObject;
-  Player() : GameObject(), dx_(1), dy_(0) {}
+  Player() : GameObject(), dx_(60), dy_(0) {}
 
-  void Update() {
-    x_ += dx_;
+  void Update(const float delta) {
+    x_ += dx_ * delta;
     if (x_ < 0) {
       x_ = 0;
       dx_ = -dx_;
@@ -32,7 +32,7 @@ class SandboxState : public GameState {
 
   virtual void OnEnter() override;
   virtual void OnHandleEvent(const SDL_Event* event) override {}
-  virtual void OnUpdate() override;
+  virtual void OnUpdate(const float delta) override;
   virtual void OnRender(SDL_Renderer* renderer) override;
   virtual std::string GetID() const override { return id_; }
 
@@ -52,13 +52,12 @@ void SandboxState::OnEnter() {
   jampy_->SetTexture(tex_);
 }
 
-void SandboxState::OnUpdate() {
-  jampy_->Update();
+void SandboxState::OnUpdate(const float delta) {
+  jampy_->Update(delta);
 }
 
 void SandboxState::OnRender(SDL_Renderer* renderer) {
   jampy_->Render(renderer);
-  SDL_Delay(5);
 }
 
 int main(int argc, char *argv[]) {

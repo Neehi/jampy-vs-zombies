@@ -19,7 +19,7 @@ class GameState {
   virtual void OnExit();
 
   virtual void OnHandleEvent(const SDL_Event* event) = 0;
-  virtual void OnUpdate() = 0;
+  virtual void OnUpdate(const float delta) = 0;
   virtual void OnRender(SDL_Renderer* renderer) = 0;
 
   inline Game& GetGame() const { return *game_; }

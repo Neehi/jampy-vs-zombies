@@ -82,10 +82,10 @@ void Game::HandleEvents() {
   }
 }
 
-void Game::Update() {
+void Game::Update(const float delta) {
   // Update current game state
   if (current_state_ != nullptr) {
-    current_state_->OnUpdate();
+    current_state_->OnUpdate(delta);
   }
 }
 
@@ -105,10 +105,53 @@ void Game::Render() {
 
 void Game::Run() {
   running_ = true;
+
+  constexpr uint32_t kTicksPerSecond = 1000;
+  const uint32_t ticks_per_frame = kTicksPerSecond / frame_rate_;
+  const float fixed_delta = 1 / (float)frame_rate_;  // Fixed update delta
+
+  std::cout << "Target FPS: " << frame_rate_ << " (" << ticks_per_frame
+            << "ms/frame)\n";
+
+  uint32_t last_ticks = SDL_GetTicks();
+  uint32_t current_ticks;
+  uint32_t elapsed_ticks;
+  uint32_t lag{0};
+  uint32_t frames{0};
+  uint32_t frame_counter_target{last_ticks + kTicksPerSecond};
+
   while (running_) {
-    HandleEvents();
-    Update();
-    Render();
+    // Calculate ticks since last iteration
+    current_ticks = SDL_GetTicks();
+    elapsed_ticks = current_ticks - last_ticks;
+    last_ticks = current_ticks;
+    lag += elapsed_ticks;  // Acculumate elapsed ticks
+
+    // Update frame counter
+    if (current_ticks >= frame_counter_target) {
+      std::cout << "FPS: " << frames << "\n";
+      fps_ = frames;
+      frames = 0;
+      frame_counter_target = current_ticks + kTicksPerSecond;
+    }
+
+    // Update logic and render frame
+    if (lag >= ticks_per_frame) {
+      // Perform fixed update(s)
+      while (lag >= ticks_per_frame) {
+        HandleEvents();
+        Update(fixed_delta);
+        lag -= ticks_per_frame;
+      }
+
+      // Render a single frame
+      Render();
+      frames++;
+
+    } else {
+      // Sleep for a bit
+      SDL_Delay(1);
+    }
   }
 }
 

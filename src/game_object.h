@@ -15,7 +15,7 @@ class GameObject {
   GameObject(float x, float y) : x_(x), y_(y) {}
   ~GameObject() = default;
 
-  virtual void Update() {}
+  virtual void Update(const float delta) {}
   virtual void Render(SDL_Renderer* sdl_renderer);
 
   inline float GetX() const { return x_; }
