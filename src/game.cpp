@@ -49,6 +49,10 @@ Game::Game(const std::size_t screen_width, const std::size_t screen_height,
     // TODO: Error handling
   }
 
+  // Create input manager
+  std::cout << "Creating input manager\n";
+  input_manager_ = std::make_unique<InputManager>();
+
   // Set game running
   running_ = true;
 }
@@ -66,18 +70,15 @@ Game::~Game() {
 
 void Game::HandleEvents() {
   SDL_Event event;
-  if (SDL_PollEvent(&event)) {
+  while (SDL_PollEvent(&event)) {
     switch (event.type) {
       case SDL_QUIT:
         std::cout << "Received SDL_Quit event\n";
         running_ = false;
         return;
       default:
+        input_manager_->HandleEvent(event);
         break;
-    }
-    // Pass event to current game state
-    if (current_state_ != nullptr) {
-      current_state_->OnHandleEvent(&event);
     }
   }
 }

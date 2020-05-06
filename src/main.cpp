@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <memory>
 
 #include "game.h"
@@ -5,23 +6,30 @@
 #include "game_state.h"
 #include "texture.h"
 
+class GameState;
+
 class Player : public GameObject {
  public:
   using GameObject::GameObject;
-  Player() : GameObject(), dx_(60), dy_(0) {}
+  Player(GameState* game_state)
+      : GameObject(), game_state_(game_state), dx_(60), dy_(0) {
+    const auto h = game_state->GetGame().GetScreenHeight();
+    x_ = -18;
+    y_ = h - 110;
+  }
 
   void Update(const float delta) {
-    x_ += dx_ * delta;
-    if (x_ < 0) {
-      x_ = 0;
-      dx_ = -dx_;
-    } else if (x_ > 640 - 64) {
-      x_ = 640-64;
-      dx_ = -dx_;
+    const auto& input = game_state_->GetGame().GetInputManager();
+    if (input.IsKeyPressed(SDL_SCANCODE_LEFT)) {
+      x_ = std::max((float)-18, x_ - dx_ * delta);
+    }
+    if (input.IsKeyPressed(SDL_SCANCODE_RIGHT)) {
+      x_ = std::min((float)(640 - 82), x_ + dx_ * delta);
     }
   }
 
  private:
+  GameState* game_state_;
   float dx_{0};
   float dy_{0};
 };
@@ -38,7 +46,7 @@ class SandboxState : public GameState {
 
  private:
   std::shared_ptr<Texture> tex_{nullptr};
-  std::shared_ptr<Player> jampy_ = std::make_shared<Player>();
+  std::shared_ptr<Player> jampy_ = std::make_shared<Player>(this);
 
  private:
   static const std::string id_;

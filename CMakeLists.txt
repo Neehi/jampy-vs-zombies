@@ -20,6 +20,8 @@ set (
 	src/game_object.h
 	src/game_state.cpp
 	src/game_state.h
+	src/input_manager.cpp
+	src/input_manager.h
 	src/main.cpp
 	src/texture.cpp
 	src/texture.h

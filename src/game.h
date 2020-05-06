@@ -11,6 +11,7 @@
 #include <SDL.h>
 
 #include "game_state.h"
+#include "input_manager.h"
 
 class Game {
   static const uint32_t kDefaultFrameRate = 60;
@@ -32,6 +33,8 @@ class Game {
 
   inline std::uint32_t GetFPS() const { return fps_; }
 
+  inline InputManager& GetInputManager() const { return *input_manager_; }
+
  protected:
   void HandleEvents();
   void Update(const float delta);
@@ -49,6 +52,8 @@ class Game {
 
   uint32_t frame_rate_{kDefaultFrameRate};
   uint32_t fps_{0};
+
+  std::unique_ptr<InputManager> input_manager_;
 
   bool running_{false};
 
