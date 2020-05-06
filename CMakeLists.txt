@@ -16,6 +16,8 @@ set (
 	SOURCE_FILES
 	src/game.cpp
 	src/game.h
+	src/game_object.cpp
+	src/game_object.h
 	src/game_state.cpp
 	src/game_state.h
 	src/main.cpp
