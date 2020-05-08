@@ -10,21 +10,23 @@ class GameState;
 
 class Player : public GameObject {
  public:
-  using GameObject::GameObject;
-  Player(GameState* game_state)
-      : GameObject(), game_state_(game_state), dx_(60), dy_(0) {
+  Player(GameState* game_state, const std::string template_id,
+         const std::size_t width, const std::size_t height)
+      : GameObject(template_id, width, height),
+        game_state_(game_state),
+        dx_(60), dy_(0) {
     const auto h = game_state->GetGame().GetScreenHeight();
-    x_ = -18;
-    y_ = h - 110;
+    x_ = 0;
+    y_ = h - 128;
   }
 
   void Update(const float delta) {
     const auto& input = game_state_->GetGame().GetInputManager();
     if (input.IsKeyPressed(SDL_SCANCODE_LEFT)) {
-      x_ = std::max((float)-18, x_ - dx_ * delta);
+      x_ = std::max((float)0, x_ - dx_ * delta);
     }
     if (input.IsKeyPressed(SDL_SCANCODE_RIGHT)) {
-      x_ = std::min((float)(640 - 82), x_ + dx_ * delta);
+      x_ = std::min((float)(640 - 128), x_ + dx_ * delta);
     }
   }
 
@@ -45,7 +47,7 @@ class SandboxState : public GameState {
   virtual std::string GetID() const override { return id_; }
 
  private:
-  std::shared_ptr<Player> jampy_ = std::make_shared<Player>(this);
+  std::shared_ptr<Player> jampy_;
 
  private:
   static const std::string id_;
@@ -59,7 +61,7 @@ void SandboxState::OnEnter() {
       "knight",
       "knight/knight.png",
       GetGame().GetSDLRenderer());
-  jampy_->SetTexture("knight");
+  jampy_ = std::make_shared<Player>(this, "knight", 128, 128);
 }
 
 void SandboxState::OnUpdate(const float delta) {
