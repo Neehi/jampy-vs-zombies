@@ -4,6 +4,8 @@
 
 #include <SDL_image.h>
 
+#include "asset_manager.h"
+
 Game::Game(const std::size_t screen_width, const std::size_t screen_height,
            const std::string& title)
     : screen_width_(screen_width), screen_height_(screen_height) {
@@ -53,11 +55,18 @@ Game::Game(const std::size_t screen_width, const std::size_t screen_height,
   std::cout << "Creating input manager\n";
   input_manager_ = std::make_unique<InputManager>();
 
+  // Create asset manager
+  std::cout << "Creating asset manager\n";
+  AssetManager::Instance();  // XXX: Doesn't need to be explicitly called
+
   // Set game running
   running_ = true;
 }
 
 Game::~Game() {
+  // Free any resources
+  std::cout << "Cleaning up resources\n";
+  AssetManager::Instance().Purge();
   // Shutdown SDL_image
   std::cout << "Shutting down SDL_image\n";
   IMG_Quit();

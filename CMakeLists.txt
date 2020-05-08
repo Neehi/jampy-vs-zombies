@@ -14,6 +14,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 # Source files
 set (
 	SOURCE_FILES
+	src/asset_manager.cpp
+	src/asset_manager.h
 	src/game.cpp
 	src/game.h
 	src/game_object.cpp
@@ -23,8 +25,6 @@ set (
 	src/input_manager.cpp
 	src/input_manager.h
 	src/main.cpp
-	src/texture.cpp
-	src/texture.h
 )
 
 # Packages

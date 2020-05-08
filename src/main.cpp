@@ -1,10 +1,10 @@
 #include <algorithm>
 #include <memory>
 
+#include "asset_manager.h"
 #include "game.h"
 #include "game_object.h"
 #include "game_state.h"
-#include "texture.h"
 
 class GameState;
 
@@ -45,7 +45,6 @@ class SandboxState : public GameState {
   virtual std::string GetID() const override { return id_; }
 
  private:
-  std::shared_ptr<Texture> tex_{nullptr};
   std::shared_ptr<Player> jampy_ = std::make_shared<Player>(this);
 
  private:
@@ -56,8 +55,11 @@ const std::string SandboxState::id_ = "Sandbox";
 
 void SandboxState::OnEnter() {
   GameState::OnEnter();
-  tex_ = std::make_shared<Texture>("../res/textures/Knight/knight.png", GetGame().GetSDLRenderer());
-  jampy_->SetTexture(tex_);
+  AssetManager::Instance().LoadTexture(
+      "knight",
+      "knight/knight.png",
+      GetGame().GetSDLRenderer());
+  jampy_->SetTexture("knight");
 }
 
 void SandboxState::OnUpdate(const float delta) {

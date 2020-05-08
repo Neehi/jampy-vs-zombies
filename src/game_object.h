@@ -3,11 +3,9 @@
 #define GAME_OBJECT_H
 
 #include <cstddef>
-#include <memory>
+#include <string>
 
 #include <SDL.h>
-
-#include "texture.h"
 
 class GameObject {
  public:
@@ -23,14 +21,14 @@ class GameObject {
   inline void SetX(const float x) { x_ = x; }
   inline void SetY(const float y) { y_ = y; }
 
-  void SetTexture(const std::shared_ptr<Texture> texture);
+  void SetTexture(std::string id);
 
  protected:
   float x_;
   float y_;
 
  private:
-  std::shared_ptr<Texture> texture_{nullptr};
+  SDL_Texture* texture_{NULL};
 };
 
 #endif
