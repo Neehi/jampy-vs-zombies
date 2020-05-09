@@ -25,6 +25,8 @@ set (
 	src/input_manager.cpp
 	src/input_manager.h
 	src/main.cpp
+	src/player.cpp
+	src/player.h
 )
 
 # Packages

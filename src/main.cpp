@@ -1,40 +1,10 @@
-#include <algorithm>
 #include <memory>
+#include <string>
 
 #include "asset_manager.h"
 #include "game.h"
-#include "game_object.h"
 #include "game_state.h"
-
-class GameState;
-
-class Player : public GameObject {
- public:
-  Player(GameState* game_state, const std::string template_id,
-         const std::size_t width, const std::size_t height)
-      : GameObject(template_id, width, height),
-        game_state_(game_state),
-        dx_(60), dy_(0) {
-    const auto h = game_state->GetGame().GetScreenHeight();
-    x_ = 0;
-    y_ = h - 128;
-  }
-
-  void Update(const float delta) {
-    const auto& input = game_state_->GetGame().GetInputManager();
-    if (input.IsKeyPressed(SDL_SCANCODE_LEFT)) {
-      x_ = std::max((float)0, x_ - dx_ * delta);
-    }
-    if (input.IsKeyPressed(SDL_SCANCODE_RIGHT)) {
-      x_ = std::min((float)(640 - 128), x_ + dx_ * delta);
-    }
-  }
-
- private:
-  GameState* game_state_;
-  float dx_{0};
-  float dy_{0};
-};
+#include "player.h"
 
 class SandboxState : public GameState {
  public:
