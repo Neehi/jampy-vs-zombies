@@ -6,6 +6,7 @@
 #include "game.h"
 #include "game_state.h"
 #include "player.h"
+#include "transform.h"
 
 using TextureList = std::map<std::string, std::string>;
 
