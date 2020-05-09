@@ -1,3 +1,4 @@
+#include <map>
 #include <memory>
 #include <string>
 
@@ -5,6 +6,23 @@
 #include "game.h"
 #include "game_state.h"
 #include "player.h"
+
+using TextureList = std::map<std::string, std::string>;
+
+const TextureList player_textures = {
+    {"knight", "Knight/knight.png"},
+    {"knight_idle01", "Knight/idle/idle1.png"},
+    {"knight_idle02", "Knight/idle/idle2.png"},
+    {"knight_idle03", "Knight/idle/idle3.png"},
+    {"knight_idle04", "Knight/idle/idle4.png"},
+    {"knight_idle05", "Knight/idle/idle5.png"},
+    {"knight_idle06", "Knight/idle/idle6.png"},
+    {"knight_idle07", "Knight/idle/idle7.png"},
+    {"knight_idle08", "Knight/idle/idle8.png"},
+    {"knight_idle09", "Knight/idle/idle9.png"},
+    {"knight_idle10", "Knight/idle/idle10.png"},
+    {"knight_idle11", "Knight/idle/idle11.png"},
+    {"knight_idle12", "Knight/idle/idle12.png"}};
 
 class SandboxState : public GameState {
  public:
@@ -27,10 +45,12 @@ const std::string SandboxState::id_ = "Sandbox";
 
 void SandboxState::OnEnter() {
   GameState::OnEnter();
-  AssetManager::Instance().LoadTexture(
-      "knight",
-      "knight/knight.png",
-      GetGame().GetSDLRenderer());
+  for (auto it = player_textures.begin(); it != player_textures.end(); it++) {
+    AssetManager::Instance().LoadTexture(
+        it->first,
+        it->second,
+        GetGame().GetSDLRenderer());
+  }
   jampy_ = std::make_shared<Player>(this, "knight", 128, 128);
 }
 

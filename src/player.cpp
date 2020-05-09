@@ -24,4 +24,8 @@ void Player::Update(const float delta) {
   if (input.IsKeyPressed(SDL_SCANCODE_RIGHT)) {
     x_ = std::min((float)(640 - 128), x_ + dx_ * delta);
   }
+  // Update animation
+  const std::size_t frame_count = current_sequence_->size();
+  current_frame_ = (SDL_GetTicks() / 80) % frame_count;
+  SetTexture(current_sequence_->at(current_frame_));
 }
