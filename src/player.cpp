@@ -2,6 +2,7 @@
 
 #include <algorithm>
 
+#include "asset_manager.h"
 #include "game.h"
 #include "vector2.h"
 
@@ -28,5 +29,5 @@ void Player::Update(const float delta) {
   // Update animation
   const std::size_t frame_count = current_sequence_->size();
   current_frame_ = (SDL_GetTicks() / 80) % frame_count;
-  SetTexture(current_sequence_->at(current_frame_));
+  SetTexture(AssetManager::Instance().GetTexture(current_sequence_->at(current_frame_)));
 }

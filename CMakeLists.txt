@@ -28,6 +28,8 @@ set (
 	src/main.cpp
 	src/player.cpp
 	src/player.h
+	src/sprite.cpp
+	src/sprite.h
 	src/transform.h
 	src/transformable.h
 	src/vector2.h
