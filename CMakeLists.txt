@@ -16,6 +16,7 @@ set (
 	SOURCE_FILES
 	src/asset_manager.cpp
 	src/asset_manager.h
+	src/drawable.h
 	src/game.cpp
 	src/game.h
 	src/game_object.cpp

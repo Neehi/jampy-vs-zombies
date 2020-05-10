@@ -11,7 +11,7 @@ GameObject::GameObject(const std::string texture_id,
   SetPosition(x, y);
 }
 
-void GameObject::Render(SDL_Renderer* renderer) {
+void GameObject::Render(SDL_Renderer* renderer) const {
   const Transform transform = GetTransform();
   const Vector2f position = transform.GetPosition();
   //const float rotation = transform.GetRotation();

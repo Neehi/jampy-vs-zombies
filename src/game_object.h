@@ -7,9 +7,10 @@
 
 #include <SDL.h>
 
+#include "drawable.h"
 #include "transformable.h"
 
-class GameObject : public Transformable {
+class GameObject : public Drawable, public Transformable {
  public:
   GameObject(const std::string texture_id, const float x, const float y,
              const std::size_t width, const std::size_t height);
@@ -19,7 +20,7 @@ class GameObject : public Transformable {
   ~GameObject() = default;
 
   virtual void Update(const float delta) {}
-  virtual void Render(SDL_Renderer* renderer);
+  virtual void Render(SDL_Renderer* renderer) const override;
 
   inline std::size_t GetWidth() const { return width_; }
   inline std::size_t GetHeight() const { return height_; }
