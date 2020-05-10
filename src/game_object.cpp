@@ -1,7 +1,6 @@
 #include "game_object.h"
 
 #include "asset_manager.h"
-#include "vector2.h"
 
 GameObject::GameObject(const std::string texture_id,
                        const float x,  const float y,
@@ -9,18 +8,22 @@ GameObject::GameObject(const std::string texture_id,
                        const std::size_t height)
     : width_(width), height_(height) {
   SetTexture(texture_id);
-  transform_ = Transform(Vector2f(x, y));
+  SetPosition(x, y);
 }
 
 void GameObject::Render(SDL_Renderer* renderer) {
+  const Transform transform = GetTransform();
+  const Vector2f position = transform.GetPosition();
+  //const float rotation = transform.GetRotation();
+  //const float scale = transform.GetScale();
   const SDL_Rect src_rect = {
       static_cast<int>(clip_x_),
       static_cast<int>(clip_y_),
       static_cast<int>(width_),
       static_cast<int>(height_)};
   const SDL_Rect dst_rect = {
-      static_cast<int>(transform_.GetPosition().x),
-      static_cast<int>(transform_.GetPosition().y),
+      static_cast<int>(position.x),
+      static_cast<int>(position.y),
       static_cast<int>(width_),
       static_cast<int>(height_)};
   if (nullptr != texture_) {

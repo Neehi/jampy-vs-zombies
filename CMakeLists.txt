@@ -28,6 +28,7 @@ set (
 	src/player.cpp
 	src/player.h
 	src/transform.h
+	src/transformable.h
 	src/vector2.h
 )
 

@@ -7,9 +7,9 @@
 
 #include <SDL.h>
 
-#include "transform.h"
+#include "transformable.h"
 
-class GameObject {
+class GameObject : public Transformable {
  public:
   GameObject(const std::string texture_id, const float x, const float y,
              const std::size_t width, const std::size_t height);
@@ -20,15 +20,6 @@ class GameObject {
 
   virtual void Update(const float delta) {}
   virtual void Render(SDL_Renderer* renderer);
-
-  inline const Vector2f& GetPosition() const { return transform_.GetPosition(); }
-  inline float GetX() const { return transform_.GetPosition().x; }
-  inline float GetY() const { return transform_.GetPosition().y; }
-  inline float GetRotation() const { return transform_.GetRotation(); }
-  inline float GetScale() const { return transform_.GetScale(); }
-
-  inline void SetPosition(const Vector2f& position) { transform_.SetPosition(position); }
-  inline void SetPosition(const float x, const float y) { SetPosition(Vector2f(x, y)); }
 
   inline std::size_t GetWidth() const { return width_; }
   inline std::size_t GetHeight() const { return height_; }
@@ -43,7 +34,6 @@ class GameObject {
   std::size_t clip_y_{0};
   std::size_t width_;
   std::size_t height_;
-  Transform transform_;
 };
 
 #endif
