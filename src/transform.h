@@ -29,16 +29,9 @@ class Transform {
   inline void SetScale(const float scale) { scale_ = scale; }
 
   inline void Translate(const Vector2f offset) {
-    Translate(offset.x, offset.y);
+    position_.x += offset.x;
+    position_.y += offset.y;
   }
-
-  inline void Translate(const float dx, const float dy) {
-    position_.x += dx;
-    position_.y += dy;
-  }
-
-  inline void TranslateX(const float dx) { position_.x += dx; }
-  inline void TranslateY(const float dy) { position_.y += dy; }
 
   // Debug
 
@@ -60,8 +53,8 @@ class Transform {
 
  private:
   Vector2f position_;
-  float rotation_{0.0f};
-  float scale_{1.0f};
+  float rotation_;
+  float scale_;
 };
 
 #endif
