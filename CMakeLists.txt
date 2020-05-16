@@ -14,6 +14,9 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 # Source files
 set (
 	SOURCE_FILES
+	src/animation.h
+	src/animation_player.cpp
+	src/animation_player.h
 	src/asset_manager.cpp
 	src/asset_manager.h
 	src/drawable.h

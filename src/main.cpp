@@ -23,9 +23,15 @@ const TextureList player_textures = {
     {"knight_idle09", "Knight/idle/idle9.png"},
     {"knight_idle10", "Knight/idle/idle10.png"},
     {"knight_idle11", "Knight/idle/idle11.png"},
-    {"knight_idle12", "Knight/idle/idle12.png"}};
+    {"knight_idle12", "Knight/idle/idle12.png"},
+    {"knight_walk01", "Knight/Walk/walk1.png"},
+    {"knight_walk02", "Knight/Walk/walk2.png"},
+    {"knight_walk03", "Knight/Walk/walk3.png"},
+    {"knight_walk04", "Knight/Walk/walk4.png"},
+    {"knight_walk05", "Knight/Walk/walk5.png"},
+    {"knight_walk06", "Knight/Walk/walk6.png"}};
 
-class SandboxState : public GameState {
+    class SandboxState : public GameState {
  public:
   using GameState::GameState;
 

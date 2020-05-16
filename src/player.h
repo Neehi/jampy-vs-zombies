@@ -3,17 +3,44 @@
 #define PLAYER_H
 
 #include <cstddef>
+#include <memory>
 #include <string>
 #include <vector>
 
+#include "animation_player.h"
 #include "game_object.h"
 #include "game_state.h"
 
 class Player : public GameObject {
-  std::vector<std::string> player_idle_animations = {
-      "knight_idle01", "knight_idle02", "knight_idle03", "knight_idle04",
-      "knight_idle05", "knight_idle06", "knight_idle07", "knight_idle08",
-      "knight_idle09", "knight_idle10", "knight_idle11", "knight_idle12"};
+ private:
+  std::shared_ptr<Animation> player_idle_animation =
+      std::make_shared<Animation>(
+          "player_idle",
+          std::vector<AnimationFrame>{
+             {"knight_idle01", 0, 0, 128, 128},
+             {"knight_idle02", 0, 0, 128, 128},
+             {"knight_idle03", 0, 0, 128, 128},
+             {"knight_idle04", 0, 0, 128, 128},
+             {"knight_idle05", 0, 0, 128, 128},
+             {"knight_idle06", 0, 0, 128, 128},
+             {"knight_idle07", 0, 0, 128, 128},
+             {"knight_idle08", 0, 0, 128, 128},
+             {"knight_idle09", 0, 0, 128, 128},
+             {"knight_idle10", 0, 0, 128, 128},
+             {"knight_idle11", 0, 0, 128, 128},
+             {"knight_idle12", 0, 0, 128, 128}},
+          8);
+  std::shared_ptr<Animation> player_walk_animation =
+      std::make_shared<Animation>(
+          "player_walk",
+          std::vector<AnimationFrame>{
+              {"knight_walk01", 0, 0, 128, 128},
+              {"knight_walk02", 0, 0, 128, 128},
+              {"knight_walk03", 0, 0, 128, 128},
+              {"knight_walk04", 0, 0, 128, 128},
+              {"knight_walk05", 0, 0, 128, 128},
+              {"knight_walk06", 0, 0, 128, 128}},
+          15);
 
  public:
   Player(GameState* game_state, const std::string template_id,
@@ -27,8 +54,7 @@ class Player : public GameObject {
   float dx_{0};
   float dy_{0};
 
-  std::vector<std::string>* current_sequence_ = &player_idle_animations;
-  int current_frame_ = 0;  // XXX: Needed?
+  AnimationPlayer animation_player_;
 };
 
 #endif
