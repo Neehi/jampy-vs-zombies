@@ -15,14 +15,10 @@ void InputManager::HandleEvent(SDL_Event& event) {
   switch (event.type) {
     case SDL_KEYDOWN: {
       const SDL_Scancode scancode = event.key.keysym.scancode;
-      std::cout << SDL_GetScancodeName(scancode) << " key pressed ("
-                << IsKeyPressed(scancode) << ")\n";
       break;
     }
     case SDL_KEYUP: {
       const SDL_Scancode scancode = event.key.keysym.scancode;
-      std::cout << SDL_GetScancodeName(scancode) << " key released ("
-                << IsKeyPressed(scancode) << ")\n";
       break;
     }
   }

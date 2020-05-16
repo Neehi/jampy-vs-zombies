@@ -55,8 +55,6 @@ bool AssetManager::LoadTexture(const std::string id,
 
   int w, h;
   SDL_QueryTexture(texture, NULL, NULL, &w, &h);
-  std::cout << "AssetManager: Texture '" << id << "' loaded (" << w << "x" << h
-            << ")\n";
 
   textures_[id] = texture;
 

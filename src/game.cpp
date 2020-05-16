@@ -139,7 +139,6 @@ void Game::Run() {
 
     // Update frame counter
     if (current_ticks >= frame_counter_target) {
-      std::cout << "FPS: " << frames << "\n";
       fps_ = frames;
       frames = 0;
       frame_counter_target = current_ticks + kTicksPerSecond;
