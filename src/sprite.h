@@ -15,11 +15,11 @@ class Sprite : public Drawable, public Transformable {
       : texture_(texture), src_rect_(src_rect) {}
   ~Sprite() = default;
 
-  const SDL_Texture* GetTexture() const { return texture_; }
-  const SDL_Rect& GetTextureRect() const { return src_rect_; }
-  int GetWidth() const { return src_rect_.w; }
-  int GetHeight() const { return src_rect_.h; }
-  const SDL_Rect& GetBounds() const {
+  inline const SDL_Texture* GetTexture() const { return texture_; }
+  inline const SDL_Rect& GetTextureRect() const { return src_rect_; }
+  inline int GetWidth() const { return src_rect_.w; }
+  inline int GetHeight() const { return src_rect_.h; }
+  inline const SDL_Rect& GetBounds() const {
     return SDL_Rect{0, 0, src_rect_.w, src_rect_.h};
   }
   inline bool IsFlipped() const { return flip_; }
