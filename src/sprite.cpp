@@ -8,6 +8,8 @@ void Sprite::Render(SDL_Renderer* renderer) const {
   const SDL_Point center = SDL_Point{0, 0};  // Rotate around the origin
   const float scale = transform.GetScale();
 
+  const SDL_RendererFlip flip = flip_ ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+
   const SDL_Rect dst_rect = {
       static_cast<int>(position.x),
       static_cast<int>(position.y),
@@ -23,7 +25,7 @@ void Sprite::Render(SDL_Renderer* renderer) const {
         &dst_rect,
         angle,
         &center,
-        SDL_FLIP_NONE);
+        flip);
   }
 
   // Debug...

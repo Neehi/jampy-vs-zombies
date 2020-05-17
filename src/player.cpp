@@ -78,6 +78,9 @@ void Player::HandleAnimation(const float delta) {
   const AnimationFrame frame = animation_player_.GetCurrentFrame();
   SetTexture(AssetManager::Instance().GetTexture(frame.texture_id));
   SetTextureRect(SDL_Rect{frame.x, frame.y, frame.width, frame.height});
+
+  // Flip sprite if moving left
+  SetFlipped(direction_ == PlayerDirection::kLeft);
 }
 
 void Player::Update(const float delta) {
