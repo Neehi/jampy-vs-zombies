@@ -11,6 +11,10 @@
 #include "game_object.h"
 #include "game_state.h"
 
+enum class PlayerState { kIdle = 0, kWalk };
+
+enum class PlayerDirection { kNone = 0, kLeft, kRight };
+
 class Player : public GameObject {
  private:
   std::shared_ptr<Animation> player_idle_animation =
@@ -29,7 +33,7 @@ class Player : public GameObject {
              {"knight_idle10", 0, 0, 128, 128},
              {"knight_idle11", 0, 0, 128, 128},
              {"knight_idle12", 0, 0, 128, 128}},
-          8);
+          8.0f);
   std::shared_ptr<Animation> player_walk_animation =
       std::make_shared<Animation>(
           "player_walk",
@@ -40,7 +44,7 @@ class Player : public GameObject {
               {"knight_walk04", 0, 0, 128, 128},
               {"knight_walk05", 0, 0, 128, 128},
               {"knight_walk06", 0, 0, 128, 128}},
-          15);
+          15.0f);
 
  public:
   Player(GameState* game_state, const std::string template_id,
@@ -50,9 +54,17 @@ class Player : public GameObject {
   void Update(const float delta);
 
  private:
+  void HandleInput();
+  void HandleMovement(const float delta);
+  void HandleAnimation(const float delta);
+
+ private:
   GameState* game_state_;
   float dx_{0};
   float dy_{0};
+
+  PlayerState state_{PlayerState::kIdle};
+  PlayerDirection direction_{PlayerDirection::kNone};
 
   AnimationPlayer animation_player_;
 };
