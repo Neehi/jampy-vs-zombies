@@ -52,6 +52,7 @@ class Player : public GameObject {
   ~Player() = default;
 
   void Update(const float delta);
+  virtual void Render(SDL_Renderer* renderer) const override;
 
  private:
   void HandleInput();
@@ -62,6 +63,8 @@ class Player : public GameObject {
   GameState* game_state_;
   float dx_{0};
   float dy_{0};
+  std::size_t width_{48};
+  std::size_t height_{52};
 
   PlayerState state_{PlayerState::kIdle};
   PlayerDirection direction_{PlayerDirection::kNone};
