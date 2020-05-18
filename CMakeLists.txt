@@ -24,6 +24,8 @@ set (
 	src/game.h
 	src/game_object.cpp
 	src/game_object.h
+	src/game_object_collection.cpp
+	src/game_object_collection.h
 	src/game_state.cpp
 	src/game_state.h
 	src/input_manager.cpp

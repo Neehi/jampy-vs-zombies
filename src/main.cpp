@@ -4,6 +4,7 @@
 
 #include "asset_manager.h"
 #include "game.h"
+#include "game_object_collection.h"
 #include "game_state.h"
 #include "player.h"
 #include "transform.h"
@@ -42,7 +43,7 @@ const TextureList player_textures = {
   virtual std::string GetID() const override { return id_; }
 
  private:
-  std::shared_ptr<Player> jampy_;
+  GameObjectCollection game_objects_;
 
  private:
   static const std::string id_;
@@ -58,15 +59,16 @@ void SandboxState::OnEnter() {
         it->second,
         GetGame().GetSDLRenderer());
   }
-  jampy_ = std::make_shared<Player>(this, "knight", 128, 128);
+  std::shared_ptr<GameObject> jampy = std::make_shared<Player>(this, "knight", 128, 128);
+  game_objects_.Add(jampy);
 }
 
 void SandboxState::OnUpdate(const float delta) {
-  jampy_->Update(delta);
+  game_objects_.Update(delta);
 }
 
 void SandboxState::OnRender(SDL_Renderer* renderer) {
-  jampy_->Render(renderer);
+  game_objects_.Render(renderer);
 }
 
 int main(int argc, char *argv[]) {
