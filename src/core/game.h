@@ -11,7 +11,7 @@
 #include <SDL.h>
 
 #include "game_state.h"
-#include "input_manager.h"
+#include "input/input_manager.h"
 
 class Game {
   static const uint32_t kDefaultFrameRate = 60;

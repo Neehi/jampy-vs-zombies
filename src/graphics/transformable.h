@@ -2,8 +2,8 @@
 #ifndef TRANSFORMABLE_H
 #define TRANSFORMABLE_H
 
+#include "core/vector2.h"
 #include "transform.h"
-#include "vector2.h"
 
 class Transformable {
  public:

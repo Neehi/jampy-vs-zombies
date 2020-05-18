@@ -7,9 +7,12 @@
 #include <string>
 #include <vector>
 
-#include "animation_player.h"
-#include "game_object.h"
-#include "game_state.h"
+#include "core/game_object.h"
+#include "core/game_state.h"
+#include "graphics/animation.h"
+#include "graphics/animation_player.h"
+
+struct SDL_Renderer;
 
 enum class PlayerState { kIdle = 0, kWalk };
 

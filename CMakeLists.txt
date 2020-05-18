@@ -12,45 +12,79 @@ set(CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
 # Source files
-set (
-	SOURCE_FILES
-	src/animation.h
-	src/animation_player.cpp
-	src/animation_player.h
-	src/asset_manager.cpp
-	src/asset_manager.h
-	src/drawable.h
-	src/game.cpp
-	src/game.h
-	src/game_object.cpp
-	src/game_object.h
-	src/game_object_collection.cpp
-	src/game_object_collection.h
-	src/game_state.cpp
-	src/game_state.h
-	src/input_manager.cpp
-	src/input_manager.h
+set(
+	SOURCES
 	src/main.cpp
 	src/player.cpp
 	src/player.h
-	src/sprite.cpp
-	src/sprite.h
-	src/transform.h
-	src/transformable.h
-	src/vector2.h
+	src/sandbox_state.cpp
+	src/sandbox_state.h
 )
+source_group("" FILES ${SOURCES})
+
+set(
+    CORE_SOURCES
+    src/core/game_object_collection.cpp
+    src/core/game_object_collection.h
+    src/core/game_object.cpp
+    src/core/game_object.h
+    src/core/game_state.cpp
+    src/core/game_state.h
+    src/core/game.cpp
+    src/core/game.h
+    src/core/vector2.h
+)
+source_group("core" FILES ${CORE_SOURCES})
+
+set(
+    GRAPHICS_SOURCES
+    src/graphics/animation_player.cpp
+    src/graphics/animation_player.h
+    src/graphics/animation.h
+    src/graphics/drawable.h
+    src/graphics/sprite.cpp
+    src/graphics/sprite.h
+    src/graphics/transform.h
+    src/graphics/transformable.h
+)
+source_group("graphics" FILES ${GRAPHICS_SOURCES})
+
+set(
+    INPUT_SOURCES
+    src/input/input_manager.cpp
+    src/input/input_manager.h
+)
+source_group("input" FILES ${INPUT_SOURCES})
+
+set(
+    RESOURCE_SOURCES
+    src/resources/asset_manager.cpp
+    src/resources/asset_manager.h
+)
+source_group("resources" FILES ${RESOURCE_SOURCES})
 
 # Packages
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 
 # Define include dirs
-include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
+include_directories(
+    ${CMAKE_SOURCE_DIR}/src
+    ${SDL2_INCLUDE_DIRS}
+    ${SDL2_IMAGE_INCLUDE_DIRS}
+)
 
 # Define executable
-add_executable(JampyVsZombies ${SOURCE_FILES})
+add_executable(
+    JampyVsZombies
+    ${SOURCES}
+    ${CORE_SOURCES}
+    ${GRAPHICS_SOURCES}
+    ${INPUT_SOURCES}
+    ${RESOURCE_SOURCES}
+)
 
-# Define link libraries
+## Define link libraries
 string(STRIP "${SDL2_LIBRARIES}" SDL2_LIBRARIES)
 target_link_libraries(JampyVsZombies ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 

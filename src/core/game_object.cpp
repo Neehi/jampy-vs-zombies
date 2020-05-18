@@ -1,6 +1,6 @@
 #include "game_object.h"
 
-#include "asset_manager.h"
+#include "resources/asset_manager.h"
 
 GameObject::GameObject(const std::string texture_id,
                        const float x,  const float y,

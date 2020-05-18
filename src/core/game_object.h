@@ -7,7 +7,7 @@
 
 #include <SDL.h>
 
-#include "sprite.h"
+#include "graphics/sprite.h"
 
 class GameObject : public Sprite {
  public:

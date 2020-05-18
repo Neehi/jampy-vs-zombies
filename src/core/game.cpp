@@ -4,7 +4,7 @@
 
 #include <SDL_image.h>
 
-#include "asset_manager.h"
+#include "resources/asset_manager.h"
 
 Game::Game(const std::size_t screen_width, const std::size_t screen_height,
            const std::string& title)

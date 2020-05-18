@@ -6,7 +6,7 @@
 #include <sstream>
 #include <string>
 
-#include "vector2.h"
+#include "core/vector2.h"
 
 // XXX: This is not a true transform matrix as SDL is used for rendering and
 //      handles rotation, scaling, etc. However, this is implemented ready

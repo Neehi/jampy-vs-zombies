@@ -1,10 +1,11 @@
 #include "player.h"
 
-#include <algorithm>
+#include <SDL.h>
 
-#include "asset_manager.h"
-#include "game.h"
-#include "vector2.h"
+#include "core/game.h"
+#include "core/vector2.h"
+#include "input/input_manager.h"
+#include "resources/asset_manager.h"
 
 constexpr float kOffsetRight{20};
 constexpr float kOffsetLeft{-20};
@@ -23,7 +24,7 @@ Player::Player(GameState* game_state, const std::string template_id,
 }
 
 void Player::HandleInput() {
-  const auto& input = game_state_->GetGame().GetInputManager();
+  const InputManager& input = game_state_->GetGame().GetInputManager();
 
   state_ = PlayerState::kIdle;
   direction_ = PlayerDirection::kNone;

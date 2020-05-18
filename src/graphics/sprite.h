@@ -4,9 +4,9 @@
 
 #include <SDL.h>
 
-#include "drawable.h"
-#include "transformable.h"
-#include "vector2.h"
+#include "core/vector2.h"
+#include "graphics/drawable.h"
+#include "graphics/transformable.h"
 
 class Sprite : public Drawable, public Transformable {
  public:
