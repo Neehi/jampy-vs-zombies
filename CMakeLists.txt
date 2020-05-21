@@ -63,6 +63,14 @@ set(
 )
 source_group("resources" FILES ${RESOURCE_SOURCES})
 
+set(
+    TILEMAP_SOURCES
+    src/tilemap/tile.h
+    src/tilemap/tile_set.cpp
+    src/tilemap/tile_set.h
+)
+source_group("tilemap" FILES ${TILEMAP_SOURCES})
+
 # Packages
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
@@ -82,6 +90,7 @@ add_executable(
     ${GRAPHICS_SOURCES}
     ${INPUT_SOURCES}
     ${RESOURCE_SOURCES}
+    ${TILEMAP_SOURCES}
 )
 
 ## Define link libraries

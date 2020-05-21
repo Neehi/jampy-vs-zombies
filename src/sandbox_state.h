@@ -2,10 +2,12 @@
 #ifndef SANDBOX_STATE_H
 #define SANDBOX_STATE_H
 
+#include <memory>
 #include <string>
 
 #include "core/game_object_collection.h"
 #include "core/game_state.h"
+#include "tilemap/tile_set.h"
 
 union SDL_Event;
 struct SDL_Renderer;
@@ -22,6 +24,7 @@ class SandboxState : public GameState {
 
  private:
   GameObjectCollection game_objects_;
+  std::shared_ptr<TileSet> tile_set_{nullptr};
 
  private:
   static const std::string id_;

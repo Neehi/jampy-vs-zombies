@@ -1,11 +1,14 @@
 #include "sandbox_state.h"
 
+#include <iostream>
 #include <map>
 #include <memory>
 
 #include "core/game.h"
 #include "core/game_object.h"
+#include "core/vector2.h"
 #include "resources/asset_manager.h"
+#include "tilemap/tile.h"
 #include "player.h"
 
 using TextureList = std::map<std::string, std::string>;
@@ -42,16 +45,44 @@ void SandboxState::OnEnter() {
   }
   std::shared_ptr<GameObject> jampy =
       std::make_shared<Player>(this, "knight", 128, 128);
+  jampy->SetPosition(jampy->GetPosition() - Vector2f{0, 32});
   game_objects_.Add(jampy);
   // Load tileset
   AssetManager::Instance().LoadTexture(
       "tileset",
       "tilesets/Tileset.png",
       GetGame().GetSDLRenderer());
-  std::shared_ptr<GameObject> tileset =
-      std::make_shared<GameObject>("tileset", 288, 192);
-  tileset->SetCentered(false);
-  game_objects_.Add(tileset);
+  tile_set_ = std::make_shared<TileSet>("Sandbox", "tileset", 32, 32, 54, 9);
+  std::cout << *tile_set_ << "\n";
+  std::cout << tile_set_->GetTile(0) << "\n";
+  std::cout << tile_set_->GetTile(1) << "\n";
+  std::cout << tile_set_->GetTile(2) << "\n";
+  // Display some tiles
+  const std::vector<std::size_t> tiles{
+      1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 0, 0, 1, 2, 2, 2, 2, 2,
+      3, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+      2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+      2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+      2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2};
+  for (int i = 0; i < 20; i++) {
+    const std::size_t n = tiles[i];
+    if (n != 0) {
+      const Tile tile = tile_set_->GetTile(n - 1);
+      std::shared_ptr<GameObject> o =
+          std::make_shared<GameObject>(
+              tile.texture_id,
+              0.0f,
+              (float)tile_set_->GetTileWidth(),
+              tile_set_->GetTileWidth(),
+              tile_set_->GetTileHeight());
+      o->SetTextureRect(tile.src_rect);
+      o->SetCentered(false);
+      o->SetPosition(Vector2f{
+          (float)i * tile_set_->GetTileWidth(),
+          480 - (float)tile_set_->GetTileHeight()});
+      game_objects_.Add(o);
+    }
+  }
 }
 
 void SandboxState::OnUpdate(const float delta) { game_objects_.Update(delta); }
