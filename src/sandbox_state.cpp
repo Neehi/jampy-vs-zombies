@@ -43,6 +43,15 @@ void SandboxState::OnEnter() {
   std::shared_ptr<GameObject> jampy =
       std::make_shared<Player>(this, "knight", 128, 128);
   game_objects_.Add(jampy);
+  // Load tileset
+  AssetManager::Instance().LoadTexture(
+      "tileset",
+      "tilesets/Tileset.png",
+      GetGame().GetSDLRenderer());
+  std::shared_ptr<GameObject> tileset =
+      std::make_shared<GameObject>("tileset", 288, 192);
+  tileset->SetCentered(false);
+  game_objects_.Add(tileset);
 }
 
 void SandboxState::OnUpdate(const float delta) { game_objects_.Update(delta); }
