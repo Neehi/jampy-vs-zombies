@@ -50,17 +50,19 @@ void Sprite::Render(SDL_Renderer* renderer) const {
   SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0x00, 0xFF);
   SDL_RenderDrawRect(renderer, &dst_rect);
 
-  SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-  SDL_RenderDrawLine(
-      renderer,
-      dst_rect.x,
-      dst_rect.y + -static_cast<int>(offset_y),
-      dst_rect.x + dst_rect.w - 1,
-      dst_rect.y + -static_cast<int>(offset_y));
-  SDL_RenderDrawLine(
-      renderer,
-      dst_rect.x + -static_cast<int>(offset_x),
-      dst_rect.y,
-      dst_rect.x + -static_cast<int>(offset_x),
-      dst_rect.y + dst_rect.h - 1);
+  if (offset_x != 0 || offset_y != 0) {
+    SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderDrawLine(
+        renderer,
+        dst_rect.x,
+        dst_rect.y + -static_cast<int>(offset_y),
+        dst_rect.x + dst_rect.w - 1,
+        dst_rect.y + -static_cast<int>(offset_y));
+    SDL_RenderDrawLine(
+        renderer,
+        dst_rect.x + -static_cast<int>(offset_x),
+        dst_rect.y,
+        dst_rect.x + -static_cast<int>(offset_x),
+        dst_rect.y + dst_rect.h - 1);
+  }
 }
