@@ -54,12 +54,15 @@ void SandboxState::OnEnter() {
       GetGame().GetSDLRenderer());
   tile_set_ = std::make_shared<TileSet>("Sandbox", "tileset", 32, 32, 54, 9);
   std::cout << *tile_set_ << "\n";
-  std::cout << tile_set_->GetTile(0) << "\n";
-  std::cout << tile_set_->GetTile(1) << "\n";
-  std::cout << tile_set_->GetTile(2) << "\n";
-  // Display some tiles
+  // Setup tile layer
+  tile_layer_ = std::make_shared<TileLayer>(
+      "Tile Layer 1",
+      100, GetGame().GetScreenHeight() / 32,
+      32, 32);
+  tile_layer_->AddTileSet(tile_set_);
+  std::cout << *tile_layer_ << "\n";
   const std::vector<std::size_t> tiles{
-      1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 0, 0, 1, 2, 2, 2, 2, 2,
+      1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 0, 0, 1, 2, 2, 2, 2, 2, 2,
       3, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
@@ -68,19 +71,7 @@ void SandboxState::OnEnter() {
     const std::size_t n = tiles[i];
     if (n != 0) {
       const Tile tile = tile_set_->GetTile(n - 1);
-      std::shared_ptr<GameObject> o =
-          std::make_shared<GameObject>(
-              tile.texture_id,
-              0.0f,
-              (float)tile_set_->GetTileWidth(),
-              tile_set_->GetTileWidth(),
-              tile_set_->GetTileHeight());
-      o->SetTextureRect(tile.src_rect);
-      o->SetCentered(false);
-      o->SetPosition(Vector2f{
-          (float)i * tile_set_->GetTileWidth(),
-          480 - (float)tile_set_->GetTileHeight()});
-      game_objects_.Add(o);
+      tile_layer_->SetTile(i, GetGame().GetScreenHeight() / 32 - 1, n);
     }
   }
 }
@@ -89,4 +80,5 @@ void SandboxState::OnUpdate(const float delta) { game_objects_.Update(delta); }
 
 void SandboxState::OnRender(SDL_Renderer* renderer) {
   game_objects_.Render(renderer);
+  tile_layer_->Render(renderer);
 }

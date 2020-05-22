@@ -7,6 +7,7 @@
 
 #include "core/game_object_collection.h"
 #include "core/game_state.h"
+#include "tilemap/tile_layer.h"
 #include "tilemap/tile_set.h"
 
 union SDL_Event;
@@ -24,6 +25,7 @@ class SandboxState : public GameState {
 
  private:
   GameObjectCollection game_objects_;
+  std::shared_ptr<TileLayer> tile_layer_{nullptr};
   std::shared_ptr<TileSet> tile_set_{nullptr};
 
  private:

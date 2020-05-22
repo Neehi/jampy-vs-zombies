@@ -66,6 +66,8 @@ source_group("resources" FILES ${RESOURCE_SOURCES})
 set(
     TILEMAP_SOURCES
     src/tilemap/tile.h
+    src/tilemap/tile_layer.cpp
+    src/tilemap/tile_layer.h
     src/tilemap/tile_set.cpp
     src/tilemap/tile_set.h
 )
