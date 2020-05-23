@@ -76,12 +76,14 @@ source_group("tilemap" FILES ${TILEMAP_SOURCES})
 # Packages
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
+find_package(glm CONFIG PATHS "${CMAKE_SOURCE_DIR}/external/glm/cmake/glm/" REQUIRED)
 
 # Define include dirs
 include_directories(
     ${CMAKE_SOURCE_DIR}/src
     ${SDL2_INCLUDE_DIRS}
     ${SDL2_IMAGE_INCLUDE_DIRS}
+    ${GLM_INCLUDE_DIRS}
 )
 
 # Define executable
