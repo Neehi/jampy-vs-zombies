@@ -1,9 +1,9 @@
 #include "player.h"
 
+#include <glm/vec2.hpp>
 #include <SDL.h>
 
 #include "core/game.h"
-#include "core/vector2.h"
 #include "input/input_manager.h"
 #include "resources/asset_manager.h"
 
@@ -17,8 +17,8 @@ Player::Player(GameState* game_state, const std::string template_id,
       game_state_(game_state),
       dx_(60), dy_(0) {
   const auto h = game_state->GetGame().GetScreenHeight();
-  SetPosition(Vector2f(0 + (float)width_ * 0.5f, h - (float)height_ * 0.5f));
-  SetOffset(Vector2f{kOffsetRight, kOffsetY});
+  SetPosition(glm::vec2(0 + (float)width_ * 0.5f, h - (float)height_ * 0.5f));
+  SetOffset(glm::vec2(kOffsetRight, kOffsetY));
   animation_player_.AddAnimation(player_idle_animation);
   animation_player_.AddAnimation(player_walk_animation);
 }
@@ -41,7 +41,7 @@ void Player::HandleInput() {
 }
 
 void Player::HandleMovement(const float delta) {
-  Vector2f velocity;
+  glm::vec2 velocity(0, 0);
 
   // Move on the x-axis
   if (state_ == PlayerState::kWalk) {
@@ -52,7 +52,7 @@ void Player::HandleMovement(const float delta) {
   // ...
 
   // New position
-  Vector2f new_pos = GetPosition() + velocity;
+  glm::vec2 new_pos = GetPosition() + velocity;
 
   // Check for collisions
   const float x1 = width_ * 0.5f;
@@ -93,7 +93,7 @@ void Player::HandleAnimation(const float delta) {
   SetFlipped(direction_ == PlayerDirection::kLeft);
 
   // Set offset based on direction
-  SetOffset(Vector2f{
+  SetOffset(glm::vec2{
       direction_ == PlayerDirection::kLeft ? kOffsetLeft : kOffsetRight,
       kOffsetY});
 }
@@ -108,7 +108,7 @@ void Player::Render(SDL_Renderer* renderer) const {
   Sprite::Render(renderer);
 
   // Debug...
-  const Vector2f position = GetPosition();
+  const glm::vec2 position = GetPosition();
   const SDL_Rect hit_rect{
       static_cast<int>(position.x - (float)width_ * 0.5f),
       static_cast<int>(position.y - (float)height_ * 0.5f),

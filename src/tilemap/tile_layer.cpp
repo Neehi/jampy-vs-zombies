@@ -1,6 +1,7 @@
 #include "tile_layer.h"
 
-#include "core/vector2.h"
+#include <glm/vec2.hpp>
+
 #include "graphics/sprite.h"
 #include "resources/asset_manager.h"
 
@@ -20,7 +21,7 @@ void TileLayer::SetTile(const std::size_t col,
 
 void TileLayer::Render(SDL_Renderer* renderer) {
   std::size_t tile_id;
-  Vector2f position;
+  glm::vec2 position;
 
   for (std::size_t j = 0; j < rows_; j++) {
     position.y = (float)(j * tile_height_);

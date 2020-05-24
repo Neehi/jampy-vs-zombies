@@ -2,9 +2,9 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
+#include <glm/vec2.hpp>
 #include <SDL.h>
 
-#include "core/vector2.h"
 #include "graphics/drawable.h"
 #include "graphics/transformable.h"
 
@@ -23,13 +23,13 @@ class Sprite : public Drawable, public Transformable {
   inline const SDL_Rect& GetBounds() const {
     return SDL_Rect{0, 0, src_rect_.w, src_rect_.h};
   }
-  inline const Vector2f& GetOffset() const { return offset_; }
+  inline const glm::vec2& GetOffset() const { return offset_; }
   inline bool IsCentered() const { return centered_; }
   inline bool IsFlipped() const { return flip_; }
 
   inline void SetTexture(SDL_Texture* texture) { texture_ = texture; }
   inline void SetTextureRect(const SDL_Rect& src_rect) { src_rect_ = src_rect; }
-  inline void SetOffset(const Vector2f& offset) { offset_ = offset; }
+  inline void SetOffset(const glm::vec2& offset) { offset_ = offset; }
   inline void SetCentered(const bool center) { centered_ = center; }
   inline void SetFlipped(const bool flip) { flip_ = flip; }
 
@@ -38,7 +38,7 @@ class Sprite : public Drawable, public Transformable {
  private:
   SDL_Texture* texture_;
   SDL_Rect src_rect_;
-  Vector2f offset_{0, 0};
+  glm::vec2 offset_{0, 0};
   bool centered_{true};
   bool flip_{false};
 };

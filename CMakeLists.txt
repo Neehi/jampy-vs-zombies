@@ -32,7 +32,6 @@ set(
     src/core/game_state.h
     src/core/game.cpp
     src/core/game.h
-    src/core/vector2.h
 )
 source_group("core" FILES ${CORE_SOURCES})
 

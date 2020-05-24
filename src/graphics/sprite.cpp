@@ -2,7 +2,7 @@
 
 void Sprite::Render(SDL_Renderer* renderer) const {
   const Transform transform = GetTransform();
-  const Vector2f position = transform.GetPosition();
+  const glm::vec2 position = transform.GetPosition();
 
   float offset_x = offset_.x;
   float offset_y = offset_.y;

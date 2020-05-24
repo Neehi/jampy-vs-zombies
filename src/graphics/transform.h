@@ -6,7 +6,7 @@
 #include <sstream>
 #include <string>
 
-#include "core/vector2.h"
+#include <glm/vec2.hpp>
 
 // XXX: This is not a true transform matrix as SDL is used for rendering and
 //      handles rotation, scaling, etc. However, this is implemented ready
@@ -14,21 +14,21 @@
 
 class Transform {
  public:
-  Transform() : Transform(Vector2f(0, 0)) {}
-  Transform(const Vector2f& position) : Transform(position, 0.0f, 1.0f) {}
-  Transform(const Vector2f& position, const float rotation, const float scale)
+  Transform() : Transform(glm::vec2(0, 0)) {}
+  Transform(const glm::vec2& position) : Transform(position, 0.0f, 1.0f) {}
+  Transform(const glm::vec2& position, const float rotation, const float scale)
       : position_(position), rotation_(rotation), scale_(scale) {}
   ~Transform() = default;
 
-  inline const Vector2f& GetPosition() const { return position_; }
+  inline const glm::vec2& GetPosition() const { return position_; }
   inline float GetRotation() const { return rotation_; }
   inline float GetScale() const { return scale_; }
 
-  inline void SetPosition(const Vector2f position) { position_ = position; }
+  inline void SetPosition(const glm::vec2& position) { position_ = position; }
   inline void SetRotation(const float rotation) { rotation_ = rotation; }
   inline void SetScale(const float scale) { scale_ = scale; }
 
-  inline void Translate(const Vector2f offset) {
+  inline void Translate(const glm::vec2 offset) {
     position_.x += offset.x;
     position_.y += offset.y;
   }
@@ -38,7 +38,7 @@ class Transform {
   std::string ToString() const {
     std::stringstream result;
     result << "Transform{"
-           << "position: " << position_
+           << "position: (" << position_.x << ", " << position_.y << ")"
            << ", rotation: " << rotation_
            << ", scale: " << scale_
            << "}";
@@ -52,7 +52,7 @@ class Transform {
   }
 
  private:
-  Vector2f position_;
+  glm::vec2 position_;
   float rotation_;
   float scale_;
 };
