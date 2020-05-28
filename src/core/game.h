@@ -10,8 +10,9 @@
 
 #include <SDL.h>
 
-#include "game_state.h"
+#include "graphics/window.h"
 #include "input/input_manager.h"
+#include "game_state.h"
 
 class Game {
   static const uint32_t kDefaultFrameRate = 60;
@@ -25,10 +26,7 @@ class Game {
 
   void SetGameState(std::shared_ptr<GameState> state);
 
-  inline std::size_t GetScreenWidth() const { return screen_width_; }
-  inline std::size_t GetScreenHeight() const { return screen_height_; }
-
-  inline SDL_Window* GetSDLWindow() const { return sdl_window_; }
+  inline Window& GetWindow() const { return *window_; }
   inline SDL_Renderer* GetSDLRenderer() const { return sdl_renderer_; }
 
   inline std::uint32_t GetFPS() const { return fps_; }
@@ -45,10 +43,8 @@ class Game {
   Game& operator=(const Game&) = delete;
 
  private:
-  SDL_Window* sdl_window_;
+  std::unique_ptr<Window> window_;
   SDL_Renderer* sdl_renderer_;
-  std::size_t screen_width_;
-  std::size_t screen_height_;
 
   uint32_t frame_rate_{kDefaultFrameRate};
   uint32_t fps_{0};

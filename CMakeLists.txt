@@ -46,6 +46,8 @@ set(
     src/graphics/transform.h
     src/graphics/transform.inl
     src/graphics/transformable.h
+    src/graphics/window.cpp
+    src/graphics/window.h
 )
 source_group("graphics" FILES ${GRAPHICS_SOURCES})
 

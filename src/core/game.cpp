@@ -7,11 +7,10 @@
 #include "resources/asset_manager.h"
 
 Game::Game(const std::size_t screen_width, const std::size_t screen_height,
-           const std::string& title)
-    : screen_width_(screen_width), screen_height_(screen_height) {
+           const std::string& title) {
   // Initializing SDL
   std::cout << "Initializing SDL\n";
-  if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+  if (SDL_Init(0) != 0) {
     std::cerr << "Error initializing SDL: " << SDL_GetError() << "\n";
     // TODO: Error handling
   }
@@ -23,26 +22,14 @@ Game::Game(const std::size_t screen_width, const std::size_t screen_height,
     // TODO: Error handling
   }
 
-  // Create SDL window
-  std::cout << "Creating window (" << screen_width << "x" << screen_height
-            << ")\n";
-  sdl_window_ = SDL_CreateWindow(
-      title.c_str(),
-      SDL_WINDOWPOS_UNDEFINED,
-      SDL_WINDOWPOS_UNDEFINED,
-      static_cast<int>(screen_width),
-      static_cast<int>(screen_height),
-      SDL_WINDOW_SHOWN);
-
-  if (nullptr == sdl_window_) {
-    std::cerr << "Error creating window: " << SDL_GetError() << "\n";
-    // TODO: Error handling
-  }
+  // Create window
+  std::cout << "Creating window\n";
+  window_ = std::make_unique<Window>(title, screen_width, screen_height);
 
   // Create SDL renderer
   std::cout << "Creating renderer\n";
   sdl_renderer_ = SDL_CreateRenderer(
-      sdl_window_,
+      window_->GetSDLWindow(),
       -1,
       SDL_RENDERER_ACCELERATED);
 
@@ -67,13 +54,15 @@ Game::~Game() {
   // Free any resources
   std::cout << "Cleaning up resources\n";
   AssetManager::Instance().Purge();
+  // Close window
+  std::cout << "Closing window\n";
+  SDL_DestroyRenderer(sdl_renderer_);
+  window_.reset();
   // Shutdown SDL_image
   std::cout << "Shutting down SDL_image\n";
   IMG_Quit();
   // Shutdown SDL
   std::cout << "Shutting down SDL\n";
-  SDL_DestroyRenderer(sdl_renderer_);
-  SDL_DestroyWindow(sdl_window_);
   SDL_Quit();
 }
 

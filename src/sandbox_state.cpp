@@ -8,6 +8,7 @@
 
 #include "core/game.h"
 #include "core/game_object.h"
+#include "graphics/window.h"
 #include "resources/asset_manager.h"
 #include "tilemap/tile.h"
 #include "player.h"
@@ -39,6 +40,7 @@ const std::string SandboxState::id_ = "Sandbox";
 
 void SandboxState::OnEnter() {
   GameState::OnEnter();
+  Window& window = GetGame().GetWindow();
   for (auto it = player_textures.begin(); it != player_textures.end(); it++) {
     AssetManager::Instance().LoadTexture(
         it->first, it->second,
@@ -58,7 +60,7 @@ void SandboxState::OnEnter() {
   // Setup tile layer
   tile_layer_ = std::make_shared<TileLayer>(
       "Tile Layer 1",
-      100, GetGame().GetScreenHeight() / 32,
+      100, window.GetHeight() / 32,
       32, 32);
   tile_layer_->AddTileSet(tile_set_);
   std::cout << *tile_layer_ << "\n";
@@ -72,7 +74,7 @@ void SandboxState::OnEnter() {
     const std::size_t n = tiles[i];
     if (n != 0) {
       const Tile tile = tile_set_->GetTile(n - 1);
-      tile_layer_->SetTile(i, GetGame().GetScreenHeight() / 32 - 1, n);
+      tile_layer_->SetTile(i, window.GetHeight() / 32 - 1, n);
     }
   }
 }

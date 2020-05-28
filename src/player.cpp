@@ -4,6 +4,7 @@
 #include <SDL.h>
 
 #include "core/game.h"
+#include "graphics/window.h"
 #include "input/input_manager.h"
 #include "resources/asset_manager.h"
 
@@ -16,11 +17,11 @@ Player::Player(GameState* game_state, const std::string template_id,
     : GameObject(template_id, width, height),
       game_state_(game_state),
       dx_(60), dy_(0) {
-  const auto h = game_state->GetGame().GetScreenHeight();
+  Window& window = game_state->GetGame().GetWindow();
   GetTransform().SetPosition(
       glm::vec2(
           0 + (float)width_ * 0.5f,
-          h - (float)height_ * 0.5f));
+          window.GetHeight() - (float)height_ * 0.5f));
   SetOffset(glm::vec2(kOffsetRight, kOffsetY));
   animation_player_.AddAnimation(player_idle_animation);
   animation_player_.AddAnimation(player_walk_animation);
