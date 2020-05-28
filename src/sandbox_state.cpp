@@ -46,7 +46,7 @@ void SandboxState::OnEnter() {
   }
   std::shared_ptr<GameObject> jampy =
       std::make_shared<Player>(this, "knight", 128, 128);
-  jampy->SetPosition(jampy->GetPosition() - glm::vec2(0, 32));
+  jampy->GetTransform().SetPosition(jampy->GetTransform().GetPosition() - glm::vec2(0, 32));
   game_objects_.Add(jampy);
   // Load tileset
   AssetManager::Instance().LoadTexture(

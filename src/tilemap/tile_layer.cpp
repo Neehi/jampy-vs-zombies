@@ -41,7 +41,7 @@ void TileLayer::Render(SDL_Renderer* renderer) {
       sprite.SetCentered(false);
 
       position.x = (float)(i * tile_width_);
-      sprite.SetPosition(position);
+      sprite.GetTransform().SetPosition(position);
 
       sprite.Render(renderer);
     }

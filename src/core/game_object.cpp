@@ -1,5 +1,7 @@
 #include "game_object.h"
 
+#include <glm/vec2.hpp>
+
 #include "resources/asset_manager.h"
 
 GameObject::GameObject(const std::string texture_id,
@@ -9,5 +11,5 @@ GameObject::GameObject(const std::string texture_id,
     : Sprite() {
   SetTexture(AssetManager::Instance().GetTexture(texture_id));
   SetTextureRect(SDL_Rect{0, 0, static_cast<int>(width), static_cast<int>(height)});
-  SetPosition(x, y);
+  GetTransform().SetPosition(glm::vec2(x, y));
 }

@@ -17,7 +17,10 @@ Player::Player(GameState* game_state, const std::string template_id,
       game_state_(game_state),
       dx_(60), dy_(0) {
   const auto h = game_state->GetGame().GetScreenHeight();
-  SetPosition(glm::vec2(0 + (float)width_ * 0.5f, h - (float)height_ * 0.5f));
+  GetTransform().SetPosition(
+      glm::vec2(
+          0 + (float)width_ * 0.5f,
+          h - (float)height_ * 0.5f));
   SetOffset(glm::vec2(kOffsetRight, kOffsetY));
   animation_player_.AddAnimation(player_idle_animation);
   animation_player_.AddAnimation(player_walk_animation);
@@ -52,7 +55,7 @@ void Player::HandleMovement(const float delta) {
   // ...
 
   // New position
-  glm::vec2 new_pos = GetPosition() + velocity;
+  glm::vec2 new_pos = GetTransform().GetPosition() + velocity;
 
   // Check for collisions
   const float x1 = width_ * 0.5f;
@@ -66,7 +69,7 @@ void Player::HandleMovement(const float delta) {
   }
 
   // Update player position
-  SetPosition(new_pos);
+  GetTransform().SetPosition(new_pos);
 }
 
 void Player::HandleAnimation(const float delta) {
@@ -108,7 +111,7 @@ void Player::Render(SDL_Renderer* renderer) const {
   Sprite::Render(renderer);
 
   // Debug...
-  const glm::vec2 position = GetPosition();
+  const glm::vec2 position =  GetTransform().GetPosition();
   const SDL_Rect hit_rect{
       static_cast<int>(position.x - (float)width_ * 0.5f),
       static_cast<int>(position.y - (float)height_ * 0.5f),
