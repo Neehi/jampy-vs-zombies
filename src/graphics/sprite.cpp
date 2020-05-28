@@ -2,7 +2,6 @@
 
 void Sprite::Render(SDL_Renderer* renderer) const {
   const Transform transform = GetTransform();
-  const glm::vec2 position = transform.GetPosition();
 
   float offset_x = offset_.x;
   float offset_y = offset_.y;
@@ -11,16 +10,14 @@ void Sprite::Render(SDL_Renderer* renderer) const {
     offset_y -= (float)GetHeight() * 0.5f;
   }
 
-  float scaled_w = (float)src_rect_.w;
-  float scaled_h = (float)src_rect_.h;
+  const glm::vec2 b0 = glm::vec2(0.f + offset_x, 0.f + offset_y);
+  const glm::vec2 b2 = glm::vec2(GetWidth() + offset_x, GetHeight() + offset_y);
 
-  const float scale = transform.GetScale();
-  if (scale != 1.0f) {
-    offset_x *= scale;
-    offset_y *= scale;
-    scaled_w *= scale;
-    scaled_h *= scale;
-  }
+  const glm::vec2 p0 = transform.TransformPoint(b0);
+  const glm::vec2 p2 = transform.TransformPoint(b2);
+
+  offset_x *= transform.GetScale().x;
+  offset_y *= transform.GetScale().y;
 
   const float angle = transform.GetRotation();  // Angle of rotation
   const SDL_Point center{                       // Rotate around origin
@@ -30,10 +27,10 @@ void Sprite::Render(SDL_Renderer* renderer) const {
   const SDL_RendererFlip flip = flip_ ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
 
   SDL_Rect dst_rect = {
-      static_cast<int>(position.x + offset_x),
-      static_cast<int>(position.y + offset_y),
-      static_cast<int>(scaled_w),
-      static_cast<int>(scaled_h)};
+      static_cast<int>(p0.x),
+      static_cast<int>(p0.y),
+      static_cast<int>(p2.x - p0.x),
+      static_cast<int>(p2.y - p0.y)};
 
   if (nullptr != texture_) {
     SDL_RenderCopyEx(
@@ -50,7 +47,7 @@ void Sprite::Render(SDL_Renderer* renderer) const {
   SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0x00, 0xFF);
   SDL_RenderDrawRect(renderer, &dst_rect);
 
-  if (offset_x != 0 || offset_y != 0) {
+  if (offset_.x != 0 || offset_.y != 0) {
     SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderDrawLine(
         renderer,

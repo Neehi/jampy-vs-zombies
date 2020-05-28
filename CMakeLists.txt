@@ -44,6 +44,7 @@ set(
     src/graphics/sprite.cpp
     src/graphics/sprite.h
     src/graphics/transform.h
+    src/graphics/transform.inl
     src/graphics/transformable.h
 )
 source_group("graphics" FILES ${GRAPHICS_SOURCES})

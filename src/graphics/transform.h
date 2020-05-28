@@ -2,59 +2,53 @@
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
 
-#include <ostream>
-#include <sstream>
-#include <string>
-
+#include <glm/mat4x4.hpp>
 #include <glm/vec2.hpp>
-
-// XXX: This is not a true transform matrix as SDL is used for rendering and
-//      handles rotation, scaling, etc. However, this is implemented ready
-//      for when SDL calls are replaced by OpenGL rendering calls.
 
 class Transform {
  public:
-  Transform() : Transform(glm::vec2(0, 0)) {}
-  Transform(const glm::vec2& position) : Transform(position, 0.0f, 1.0f) {}
-  Transform(const glm::vec2& position, const float rotation, const float scale)
-      : position_(position), rotation_(rotation), scale_(scale) {}
+  // -- Constructors --
+
+  Transform() = default;
+  Transform(const glm::vec2& position,
+            const float rotation,
+            const glm::vec2& scale);
+  Transform(const Transform& other);
   ~Transform() = default;
 
-  inline const glm::vec2& GetPosition() const { return position_; }
-  inline float GetRotation() const { return rotation_; }
-  inline float GetScale() const { return scale_; }
+  // -- Accessors --
 
-  inline void SetPosition(const glm::vec2& position) { position_ = position; }
-  inline void SetRotation(const float rotation) { rotation_ = rotation; }
-  inline void SetScale(const float scale) { scale_ = scale; }
+  // Get the transformation matrix for the combined position, rotation and
+  // scale transforms to transform a point from local to world space
+  const glm::mat4x4& GetTransformation() const;  // XXX: Rename?
 
-  inline void Translate(const glm::vec2 offset) {
-    position_.x += offset.x;
-    position_.y += offset.y;
-  }
+  const glm::vec2& GetPosition() const;
+  float GetRotation() const;
+  const glm::vec2& GetScale() const;
 
-  // Debug
+  // -- Modifiers --
 
-  std::string ToString() const {
-    std::stringstream result;
-    result << "Transform{"
-           << "position: (" << position_.x << ", " << position_.y << ")"
-           << ", rotation: " << rotation_
-           << ", scale: " << scale_
-           << "}";
-    return result.str();
-  }
+  void SetPosition(const glm::vec2& position); 
+  void SetRotation(const float rotation);
+  void SetScale(const glm::vec2& scale);
 
-  friend std::ostream& operator<<(std::ostream& stream,
-                                  const Transform& transform) {
-    stream << transform.ToString();
-    return stream;
-  }
+  void Translate(const glm::vec2& offset);
+
+  // -- Conversions --
+
+  // Transform a point from local to world space
+  const glm::vec2 TransformPoint(const glm::vec2& point) const;
 
  private:
-  glm::vec2 position_;
-  float rotation_;
-  float scale_;
+  glm::vec2 position_{0.f, 0.f};
+  float rotation_{0.f};
+  glm::vec2 scale_{1.f, 1.f};
+
+  // The transformation matrix
+  mutable glm::mat4x4 transform_{1.f};
+  mutable bool dirty_{true};  // Matrix needs updating?
 };
+
+#include "transform.inl"
 
 #endif
