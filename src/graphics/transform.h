@@ -1,6 +1,5 @@
-#pragma once
-#ifndef TRANSFORM_H
-#define TRANSFORM_H
+#ifndef GRAPHICS_TRANSFORM_H_
+#define GRAPHICS_TRANSFORM_H_
 
 #include <glm/mat4x4.hpp>
 #include <glm/vec2.hpp>
@@ -51,4 +50,4 @@ class Transform {
 
 #include "transform.inl"
 
-#endif
+#endif  // GRAPHICS_TRANSFORM_H_

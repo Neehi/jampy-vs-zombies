@@ -1,6 +1,5 @@
-#pragma once
-#ifndef ANIMATION_PLAYER_H
-#define ANIMATION_PLAYER_H
+#ifndef GRAPHICS_ANIMATION_PLAYER_H_
+#define GRAPHICS_ANIMATION_PLAYER_H_
 
 #include <map>
 #include <memory>
@@ -32,4 +31,4 @@ class AnimationPlayer {
   float current_frame_delta_{0};
 };
 
-#endif
+#endif  // GRAPHICS_ANIMATION_PLAYER_H_

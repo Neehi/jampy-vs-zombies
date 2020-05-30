@@ -1,6 +1,5 @@
-#pragma once
-#ifndef DRAWABLE_H
-#define DRAWABLE_H
+#ifndef GRAPHICS_DRAWABLE_H_
+#define GRAPHICS_DRAWABLE_H_
 
 class Renderer;
 
@@ -11,4 +10,4 @@ class Drawable {
   virtual void Render(const Renderer& renderer) const = 0;
 };
 
-#endif
+#endif  // GRAPHICS_DRAWABLE_H_

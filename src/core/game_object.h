@@ -1,6 +1,5 @@
-#pragma once
-#ifndef GAME_OBJECT_H
-#define GAME_OBJECT_H
+#ifndef CORE_GAME_OBJECT_H_
+#define CORE_GAME_OBJECT_H_
 
 #include <cstddef>
 #include <string>
@@ -24,4 +23,4 @@ class GameObject : public Sprite {
   // ...
 };
 
-#endif
+#endif  // CORE_GAME_OBJECT_H_

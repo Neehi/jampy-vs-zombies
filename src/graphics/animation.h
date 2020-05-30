@@ -1,6 +1,5 @@
-#pragma once
-#ifndef ANIMATION_H
-#define ANIMATION_H
+#ifndef GRAPHICS_ANIMATION_H_
+#define GRAPHICS_ANIMATION_H_
 
 #include <cstddef>
 #include <map>
@@ -46,4 +45,4 @@ class Animation {
   bool loop_;
 };
 
-#endif
+#endif  // GRAPHICS_ANIMATION_H_

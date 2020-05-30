@@ -1,6 +1,5 @@
-#pragma once
-#ifndef WINDOW_H
-#define WINDOW_H
+#ifndef GRAPHICS_WINDOW_H_
+#define GRAPHICS_WINDOW_H_
 
 #include <cstdint>
 #include <string>
@@ -27,4 +26,4 @@ class Window {
   uint32_t height_;
 };
 
-#endif
+#endif  // GRAPHICS_WINDOW_H_

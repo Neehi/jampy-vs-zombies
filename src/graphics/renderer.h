@@ -1,6 +1,5 @@
-#pragma once
-#ifndef RENDERER_H
-#define RENDERER_H
+#ifndef GRAPHICS_RENDERER_H_
+#define GRAPHICS_RENDERER_H_
 
 #include "graphics/window.h"
 
@@ -26,4 +25,4 @@ class Renderer {
   SDL_Renderer* sdl_renderer_{nullptr};
 };
 
-#endif
+#endif  // GRAPHICS_RENDERER_H_

@@ -1,6 +1,5 @@
-#pragma once
-#ifndef GAME_STATE_H
-#define GAME_STATE_H
+#ifndef CORE_GAME_STATE_H_
+#define CORE_GAME_STATE_H_
 
 #include <string>
 
@@ -32,4 +31,4 @@ class GameState {
   Game* game_;
 };
 
-#endif
+#endif  // CORE_GAME_STATE_H_

@@ -1,6 +1,5 @@
-#pragma once
-#ifndef TILE_SET_H
-#define TILE_SET_H
+#ifndef TILEMAP_TILE_SET_H_
+#define TILEMAP_TILE_SET_H_
 
 #include <cstddef>
 #include <ostream>
@@ -76,4 +75,4 @@ class TileSet {
   std::unordered_map<std::size_t, Tile> tiles_;
 };
 
-#endif
+#endif  // TILEMAP_TILE_SET_H_

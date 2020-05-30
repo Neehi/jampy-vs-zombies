@@ -1,6 +1,5 @@
-#pragma once
-#ifndef INPUT_MANAGER_H
-#define INPUT_MANAGER_H
+#ifndef INPUT_INPUT_MANAGER_H_
+#define INPUT_INPUT_MANAGER_H_
 
 #include <SDL.h>
 
@@ -19,4 +18,4 @@ class InputManager {
   friend class Game;
 };
 
-#endif
+#endif  // INPUT_INPUT_MANAGER_H_

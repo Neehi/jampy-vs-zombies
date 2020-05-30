@@ -1,6 +1,5 @@
-#pragma once
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef PLAYER_H_
+#define PLAYER_H_
 
 #include <cstddef>
 #include <memory>
@@ -74,4 +73,4 @@ class Player : public GameObject {
   AnimationPlayer animation_player_;
 };
 
-#endif
+#endif  // PLAYER_H_

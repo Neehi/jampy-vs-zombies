@@ -1,6 +1,5 @@
-#pragma once
-#ifndef TILE_LAYER_H
-#define TILE_LAYER_H
+#ifndef TILEMAP_TILE_LAYER_H_
+#define TILEMAP_TILE_LAYER_H_
 
 #include <cstddef>
 #include <memory>
@@ -76,4 +75,4 @@ class TileLayer {
   std::vector<std::vector<std::size_t>> tile_grid_;
 };
 
-#endif
+#endif  // TILEMAP_TILE_LAYER_H_

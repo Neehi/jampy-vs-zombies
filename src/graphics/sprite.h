@@ -1,6 +1,5 @@
-#pragma once
-#ifndef SPRITE_H
-#define SPRITE_H
+#ifndef GRAPHICS_SPRITE_H_
+#define GRAPHICS_SPRITE_H_
 
 #include <glm/vec2.hpp>
 #include <SDL.h>
@@ -44,4 +43,4 @@ class Sprite : public Drawable, public Transformable {
   bool flip_{false};
 };
 
-#endif
+#endif  // GRAPHICS_SPRITE_H_

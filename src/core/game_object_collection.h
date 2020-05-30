@@ -1,6 +1,5 @@
-#pragma once
-#ifndef GAME_OBJECT_COLLECTION_H
-#define GAME_OBJECT_COLLECTION_H
+#ifndef CORE_GAME_OBJECT_COLLECTION_H_
+#define CORE_GAME_OBJECT_COLLECTION_H_
 
 #include <memory>
 #include <vector>
@@ -24,4 +23,4 @@ class GameObjectCollection {
   std::vector<std::shared_ptr<GameObject>> pending_objects_;
 };
 
-#endif
+#endif  // CORE_GAME_OBJECT_COLLECTION_H_

@@ -1,6 +1,5 @@
-#pragma once
-#ifndef TILE_H
-#define TILE_H
+#ifndef TILEMAP_TILE_H_
+#define TILEMAP_TILE_H_
 
 #include <ostream>
 #include <sstream>
@@ -33,4 +32,4 @@ struct Tile {
   }
 };
 
-#endif
+#endif  // TILEMAP_TILE_H_

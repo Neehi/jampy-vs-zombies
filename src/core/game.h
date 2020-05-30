@@ -1,6 +1,5 @@
-#pragma once
-#ifndef GAME_H
-#define GAME_H
+#ifndef CORE_GAME_H_
+#define CORE_GAME_H_
 
 #include <cstddef>
 #include <cstdint>
@@ -55,4 +54,4 @@ class Game {
   std::shared_ptr<GameState> current_state_{nullptr};
 };
 
-#endif
+#endif  // CORE_GAME_H_

@@ -1,6 +1,5 @@
-#pragma once
-#ifndef SANDBOX_STATE_H
-#define SANDBOX_STATE_H
+#ifndef SANDBOX_STATE_H_
+#define SANDBOX_STATE_H_
 
 #include <memory>
 #include <string>
@@ -32,4 +31,4 @@ class SandboxState : public GameState {
   static const char* id_;
 };
 
-#endif
+#endif  // SANDBOX_STATE_H_

@@ -1,6 +1,5 @@
-#pragma once
-#ifndef TRANSFORMABLE_H
-#define TRANSFORMABLE_H
+#ifndef GRAPHICS_TRANSFORMABLE_H_
+#define GRAPHICS_TRANSFORMABLE_H_
 
 #include "graphics/transform.h"
 
@@ -15,4 +14,4 @@ class Transformable {
   mutable Transform transform_{};
 };
 
-#endif
+#endif  // GRAPHICS_TRANSFORMABLE_H_

@@ -1,6 +1,5 @@
-#pragma once
-#ifndef ASSSET_MANAGER_H
-#define ASSSET_MANAGER_H
+#ifndef RESOURCES_ASSET_MANAGER_H_
+#define RESOURCES_ASSET_MANAGER_H_
 
 #include <map>
 #include <string>
@@ -40,4 +39,4 @@ class AssetManager {
   TextureMap textures_;
 };
 
-#endif
+#endif  // RESOURCES_ASSET_MANAGER_H_
