@@ -1,4 +1,4 @@
-#include "game.h"
+#include "core/game.h"
 
 #include <cstdint>
 #include <iostream>
@@ -13,14 +13,14 @@ Game::Game(const std::size_t screen_width, const std::size_t screen_height,
   std::cout << "Initializing SDL\n";
   if (SDL_Init(0) != 0) {
     std::cerr << "Error initializing SDL: " << SDL_GetError() << "\n";
-    // TODO: Error handling
+    // TODO(Neehi): Error handling
   }
 
   // Initialize SDL_image
   std::cout << "Initializing SDL_image\n";
   if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
     std::cerr << "Error initializing SDL_image: " << IMG_GetError() << "\n";
-    // TODO: Error handling
+    // TODO(Neehi): Error handling
   }
 
   // Create window
@@ -102,7 +102,8 @@ void Game::Run() {
 
   constexpr uint32_t kTicksPerSecond = 1000;
   const uint32_t ticks_per_frame = kTicksPerSecond / frame_rate_;
-  const float fixed_delta = 1 / (float)frame_rate_;  // Fixed update delta
+  // Fixed update delta
+  const float fixed_delta = 1 / static_cast<float>(frame_rate_);
 
   std::cout << "Target FPS: " << frame_rate_ << " (" << ticks_per_frame
             << "ms/frame)\n";
@@ -151,7 +152,7 @@ void Game::Run() {
 void Game::SetGameState(std::shared_ptr<GameState> state) {
   if (current_state_ != nullptr) {
     if (current_state_->GetID() == state->GetID()) {
-      std::cout << "GameState: '" << state->GetID() 
+      std::cout << "GameState: '" << state->GetID()
                 << "' is already the current state\n";
       return;
     }

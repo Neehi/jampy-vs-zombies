@@ -1,4 +1,4 @@
-#include "window.h"
+#include "graphics/window.h"
 
 #include <iostream>
 
@@ -10,11 +10,13 @@ Window::Window(const std::string& title,
     : width_(width), height_(height) {
   std::cout << "Window: Initializing SDL video subsystem\n";
   if (SDL_InitSubSystem(SDL_INIT_VIDEO) != 0) {
-    std::cerr << "Window: Error initializing SDL video subsystem - " << SDL_GetError() << "\n";
-    // TODO: Error handling
+    std::cerr << "Window: Error initializing SDL video subsystem - "
+              << SDL_GetError() << "\n";
+    // TODO(Neehi): Error handling
   }
 
-  std::cout << "Window: Creating SDL window (" << width << "x" << height << ")\n";
+  std::cout << "Window: Creating SDL window (" << width << "x" << height
+            << ")\n";
   sdl_window_ = SDL_CreateWindow(
       title.c_str(),
       SDL_WINDOWPOS_UNDEFINED,
@@ -25,7 +27,7 @@ Window::Window(const std::string& title,
 
   if (nullptr == sdl_window_) {
     std::cerr << "Error creating SDL window - " << SDL_GetError() << "\n";
-    // TODO: Error handling
+    // TODO(Neehi): Error handling
   }
 }
 

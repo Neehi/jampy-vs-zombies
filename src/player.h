@@ -54,7 +54,7 @@ class Player : public GameObject {
   ~Player() = default;
 
   void Update(const float delta);
-  virtual void Render(const Renderer& renderer) const override;
+  void Render(const Renderer& renderer) const override;
 
  private:
   void HandleInput();

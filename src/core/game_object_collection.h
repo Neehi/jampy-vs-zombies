@@ -5,8 +5,8 @@
 #include <memory>
 #include <vector>
 
+#include "core/game_object.h"
 #include "graphics/renderer.h"
-#include "game_object.h"
 
 class GameObjectCollection {
  public:

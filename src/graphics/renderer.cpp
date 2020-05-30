@@ -1,10 +1,10 @@
-#include "renderer.h"
+#include "graphics/renderer.h"
 
 #include <iostream>
 
 #include <SDL.h>
 
-#include "drawable.h"
+#include "graphics/drawable.h"
 
 Renderer::Renderer(const Window& window)
     : window_(&window) {
@@ -15,8 +15,9 @@ Renderer::Renderer(const Window& window)
       SDL_RENDERER_ACCELERATED);
 
   if (nullptr == sdl_renderer_) {
-    std::cerr << "Renderer: Error creating SDL rendering context - " << SDL_GetError() << "\n";
-    // TODO: Error handling
+    std::cerr << "Renderer: Error creating SDL rendering context - "
+              << SDL_GetError() << "\n";
+    // TODO(Neehi): Error handling
   }
 }
 
@@ -35,6 +36,6 @@ void Renderer::EndScene() {
 }
 
 void Renderer::Draw(const Drawable& drawable) {
-  // TODO: Pass transform
+  // TODO(Neehi): Pass transform
   drawable.Render(*this);
 }

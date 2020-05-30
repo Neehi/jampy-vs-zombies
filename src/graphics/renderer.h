@@ -2,7 +2,7 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include "window.h"
+#include "graphics/window.h"
 
 struct SDL_Renderer;
 
@@ -10,7 +10,7 @@ class Drawable;
 
 class Renderer {
  public:
-  Renderer(const Window& window);
+  explicit Renderer(const Window& window);
   ~Renderer();
 
   void BeginScene();
@@ -22,8 +22,8 @@ class Renderer {
   inline SDL_Renderer* GetSDLRenderer() const { return sdl_renderer_; }
 
  public:
-   const Window* window_;
-   SDL_Renderer* sdl_renderer_{nullptr};
+  const Window* window_;
+  SDL_Renderer* sdl_renderer_{nullptr};
 };
 
 #endif

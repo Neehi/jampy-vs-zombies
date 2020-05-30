@@ -1,8 +1,9 @@
-#include "sandbox_state.h"
+#include "sandbox_state.h"  // NOLINT(build/include_subdir)
 
 #include <iostream>
 #include <map>
 #include <memory>
+#include <vector>
 
 #include <glm/vec2.hpp>
 
@@ -11,7 +12,7 @@
 #include "graphics/window.h"
 #include "resources/asset_manager.h"
 #include "tilemap/tile.h"
-#include "player.h"
+#include "player.h"  // NOLINT(build/include_subdir)
 
 using TextureList = std::map<std::string, std::string>;
 
@@ -36,7 +37,7 @@ const TextureList player_textures = {
     {"knight_walk05", "Knight/Walk/walk5.png"},
     {"knight_walk06", "Knight/Walk/walk6.png"}};
 
-const std::string SandboxState::id_ = "Sandbox";
+const char* SandboxState::id_ = "Sandbox";
 
 void SandboxState::OnEnter() {
   GameState::OnEnter();
@@ -49,7 +50,8 @@ void SandboxState::OnEnter() {
   }
   std::shared_ptr<GameObject> jampy =
       std::make_shared<Player>(this, "knight", 128, 128);
-  jampy->GetTransform().SetPosition(jampy->GetTransform().GetPosition() - glm::vec2(0, 32));
+  jampy->GetTransform().SetPosition(
+      jampy->GetTransform().GetPosition() - glm::vec2(0, 32));
   game_objects_.Add(jampy);
   // Load tileset
   AssetManager::Instance().LoadTexture(

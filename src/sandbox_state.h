@@ -17,11 +17,11 @@ class SandboxState : public GameState {
  public:
   using GameState::GameState;
 
-  virtual void OnEnter() override;
-  virtual void OnHandleEvent(const SDL_Event* event) override {}
-  virtual void OnUpdate(const float delta) override;
-  virtual void OnRender(const Renderer& renderer) override;
-  virtual std::string GetID() const override { return id_; }
+  void OnEnter() override;
+  void OnHandleEvent(const SDL_Event* event) override {}
+  void OnUpdate(const float delta) override;
+  void OnRender(const Renderer& renderer) override;
+  inline std::string GetID() const override { return id_; }
 
  private:
   GameObjectCollection game_objects_;
@@ -29,7 +29,7 @@ class SandboxState : public GameState {
   std::shared_ptr<TileSet> tile_set_{nullptr};
 
  private:
-  static const std::string id_;
+  static const char* id_;
 };
 
 #endif

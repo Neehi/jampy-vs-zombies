@@ -12,7 +12,7 @@
 class Sprite : public Drawable, public Transformable {
  public:
   Sprite() : texture_(NULL), src_rect_() {}
-  Sprite(SDL_Texture* texture) : texture_(texture), src_rect_() {}
+  explicit Sprite(SDL_Texture* texture) : texture_(texture), src_rect_() {}
   Sprite(SDL_Texture* texture, const SDL_Rect& src_rect)
       : texture_(texture), src_rect_(src_rect) {}
   ~Sprite() = default;
@@ -34,7 +34,7 @@ class Sprite : public Drawable, public Transformable {
   inline void SetCentered(const bool center) { centered_ = center; }
   inline void SetFlipped(const bool flip) { flip_ = flip; }
 
-  virtual void Render(const Renderer& renderer) const override;
+  void Render(const Renderer& renderer) const override;
 
  private:
   SDL_Texture* texture_;

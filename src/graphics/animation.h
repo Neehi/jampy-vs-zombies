@@ -17,7 +17,7 @@ struct AnimationFrame {
 
 class Animation {
  public:
-  Animation(const std::string& name)
+  explicit Animation(const std::string& name)
       : name_(name), frame_rate_(15), loop_(false) {}
   Animation(const std::string& name,
             const std::vector<AnimationFrame>& frames,

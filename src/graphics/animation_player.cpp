@@ -1,6 +1,4 @@
-#include "animation_player.h"
-
-#include <utility>
+#include "graphics/animation_player.h"
 
 const std::string& AnimationPlayer::GetCurrentAnimation() const {
   return current_animation_.first;

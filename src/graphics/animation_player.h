@@ -5,8 +5,9 @@
 #include <map>
 #include <memory>
 #include <string>
+#include <utility>
 
-#include "animation.h"
+#include "graphics/animation.h"
 
 using AnimationMap = std::map<std::string, std::shared_ptr<Animation>>;
 

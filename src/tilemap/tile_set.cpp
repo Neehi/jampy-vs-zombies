@@ -1,4 +1,4 @@
-#include "tile_set.h"
+#include "tilemap/tile_set.h"
 
 const Tile& TileSet::GetTile(const std::size_t id) {
   // XXX: Might be more efficient just to store the tiles

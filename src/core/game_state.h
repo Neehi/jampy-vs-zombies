@@ -15,7 +15,7 @@ class Game;
 // and is responsible for its own assets, input, updating and rendering.
 class GameState {
  public:
-  GameState(Game& game) : game_(&game) {}
+  explicit GameState(Game& game) : game_(&game) {}
 
   virtual void OnEnter();
   virtual void OnExit();

@@ -1,4 +1,4 @@
-#include "game_object_collection.h"
+#include "core/game_object_collection.h"
 
 void GameObjectCollection::Add(std::shared_ptr<GameObject> game_object) {
   pending_objects_.push_back(game_object);

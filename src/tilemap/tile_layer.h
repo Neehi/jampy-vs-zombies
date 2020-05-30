@@ -3,14 +3,15 @@
 #define TILE_LAYER_H
 
 #include <cstddef>
+#include <memory>
 #include <ostream>
 #include <sstream>
 #include <string>
 #include <vector>
 
 #include "graphics/renderer.h"
-#include "tile.h"
-#include "tile_set.h"
+#include "tilemap/tile.h"
+#include "tilemap/tile_set.h"
 
 // Represents a layer of fixed tiles. These tiles will be rendered as regular
 // sprites/textures as no interactions should occur with them - collisions
@@ -70,7 +71,7 @@ class TileLayer {
   std::size_t tile_width_;
   std::size_t tile_height_;
 
-  // TODO: Update to vector
+  // TODO(Neehi): Update to vector
   std::shared_ptr<TileSet> tile_set_;
   std::vector<std::vector<std::size_t>> tile_grid_;
 };

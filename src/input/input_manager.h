@@ -4,8 +4,6 @@
 
 #include <SDL.h>
 
-//class Game;
-
 class InputManager {
  public:
   InputManager();
@@ -16,7 +14,7 @@ class InputManager {
  private:
   const Uint8* sdl_keyboard_state_;
 
-  void HandleEvent(SDL_Event& event);
+  void HandleEvent(const SDL_Event& event);
 
   friend class Game;
 };

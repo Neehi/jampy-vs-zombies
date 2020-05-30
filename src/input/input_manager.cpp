@@ -1,4 +1,4 @@
-#include "input_manager.h"
+#include "input/input_manager.h"
 
 #include <iostream>
 
@@ -11,7 +11,7 @@ bool InputManager::IsKeyPressed(SDL_Scancode key) const {
          sdl_keyboard_state_[key] == 1;
 }
 
-void InputManager::HandleEvent(SDL_Event& event) {
+void InputManager::HandleEvent(const SDL_Event& event) {
   switch (event.type) {
     case SDL_KEYDOWN: {
       const SDL_Scancode scancode = event.key.keysym.scancode;

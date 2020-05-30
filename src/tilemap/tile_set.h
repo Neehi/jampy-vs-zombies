@@ -11,7 +11,7 @@
 
 #include <SDL.h>
 
-#include "tile.h"
+#include "tilemap/tile.h"
 
 class TileSet {
  public:
@@ -48,7 +48,7 @@ class TileSet {
 
   std::string ToString() const {
     std::stringstream result;
-    result << "TileSheet{" 
+    result << "TileSheet{"
            << "name: \"" << name_ << "\""
            << ", texture_id: \"" << texture_id_ << "\""
            << ", tile_width: " << tile_width_

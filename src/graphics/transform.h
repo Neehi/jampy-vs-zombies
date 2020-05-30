@@ -28,7 +28,7 @@ class Transform {
 
   // -- Modifiers --
 
-  void SetPosition(const glm::vec2& position); 
+  void SetPosition(const glm::vec2& position);
   void SetRotation(const float rotation);
   void SetScale(const glm::vec2& scale);
 

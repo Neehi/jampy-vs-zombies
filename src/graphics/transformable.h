@@ -2,7 +2,7 @@
 #ifndef TRANSFORMABLE_H
 #define TRANSFORMABLE_H
 
-#include "transform.h"
+#include "graphics/transform.h"
 
 class Transformable {
  public:
@@ -12,7 +12,7 @@ class Transformable {
   inline Transform& GetTransform() const { return transform_; }
 
  private:
-   mutable Transform transform_{};
+  mutable Transform transform_{};
 };
 
 #endif

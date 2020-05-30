@@ -1,4 +1,4 @@
-#include "tile_layer.h"
+#include "tilemap/tile_layer.h"
 
 #include <glm/vec2.hpp>
 
@@ -24,7 +24,7 @@ void TileLayer::Render(const Renderer& renderer) {
   glm::vec2 position;
 
   for (std::size_t j = 0; j < rows_; j++) {
-    position.y = (float)(j * tile_height_);
+    position.y = static_cast<float>(j * tile_height_);
 
     for (std::size_t i = 0; i < cols_; i++) {
       tile_id = tile_grid_[j][i];
@@ -36,11 +36,10 @@ void TileLayer::Render(const Renderer& renderer) {
       const Tile tile = tile_set_->GetTile(tile_id - 1);
       Sprite sprite(
           AssetManager::Instance().GetTexture(tile.texture_id),
-          tile.src_rect
-      );
+          tile.src_rect);
       sprite.SetCentered(false);
 
-      position.x = (float)(i * tile_width_);
+      position.x = static_cast<float>(i * tile_width_);
       sprite.GetTransform().SetPosition(position);
 
       sprite.Render(renderer);

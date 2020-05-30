@@ -8,10 +8,10 @@
 #include <string>
 #include <vector>
 
+#include "core/game_state.h"
 #include "graphics/renderer.h"
 #include "graphics/window.h"
 #include "input/input_manager.h"
-#include "game_state.h"
 
 class Game {
   static const uint32_t kDefaultFrameRate = 60;

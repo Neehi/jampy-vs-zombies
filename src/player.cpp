@@ -1,4 +1,4 @@
-#include "player.h"
+#include "player.h"  // NOLINT(build/include_subdir)
 
 #include <glm/vec2.hpp>
 #include <SDL.h>
@@ -20,8 +20,8 @@ Player::Player(GameState* game_state, const std::string template_id,
   Window& window = game_state->GetGame().GetWindow();
   GetTransform().SetPosition(
       glm::vec2(
-          0 + (float)width_ * 0.5f,
-          window.GetHeight() - (float)height_ * 0.5f));
+          0 + static_cast<float>(width_) * 0.5f,
+          window.GetHeight() - static_cast<float>(height_) * 0.5f));
   SetOffset(glm::vec2(kOffsetRight, kOffsetY));
   animation_player_.AddAnimation(player_idle_animation);
   animation_player_.AddAnimation(player_walk_animation);
@@ -88,7 +88,7 @@ void Player::HandleAnimation(const float delta) {
   animation_player_.SetAnimation(animation);
   animation_player_.Update(delta);
 
-  // TODO: Refactor into animation class?
+  // TODO(Neehi): Refactor into animation class?
   const AnimationFrame frame = animation_player_.GetCurrentFrame();
   SetTexture(AssetManager::Instance().GetTexture(frame.texture_id));
   SetTextureRect(SDL_Rect{frame.x, frame.y, frame.width, frame.height});
@@ -114,8 +114,8 @@ void Player::Render(const Renderer& renderer) const {
   // Debug...
   const glm::vec2 position =  GetTransform().GetPosition();
   const SDL_Rect hit_rect{
-      static_cast<int>(position.x - (float)width_ * 0.5f),
-      static_cast<int>(position.y - (float)height_ * 0.5f),
+      static_cast<int>(position.x - static_cast<float>(width_) * 0.5f),
+      static_cast<int>(position.y - static_cast<float>(height_) * 0.5f),
       static_cast<int>(width_),
       static_cast<int>(height_)};
   SDL_SetRenderDrawColor(renderer.GetSDLRenderer(), 0x00, 0xFF, 0x00, 0xFF);

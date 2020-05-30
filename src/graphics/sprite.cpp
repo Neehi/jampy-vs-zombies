@@ -1,4 +1,4 @@
-#include "sprite.h"
+#include "graphics/sprite.h"
 
 void Sprite::Render(const Renderer& renderer) const {
   const Transform transform = GetTransform();
@@ -6,8 +6,8 @@ void Sprite::Render(const Renderer& renderer) const {
   float offset_x = offset_.x;
   float offset_y = offset_.y;
   if (centered_) {
-    offset_x -= (float)GetWidth() * 0.5f;
-    offset_y -= (float)GetHeight() * 0.5f;
+    offset_x -= static_cast<float>(GetWidth()) * 0.5f;
+    offset_y -= static_cast<float>(GetHeight()) * 0.5f;
   }
 
   const glm::vec2 b0 = glm::vec2(0.f + offset_x, 0.f + offset_y);
