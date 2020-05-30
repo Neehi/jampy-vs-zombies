@@ -1,5 +1,6 @@
 #include "game.h"
 
+#include <cstdint>
 #include <iostream>
 
 #include <SDL_image.h>
@@ -24,7 +25,10 @@ Game::Game(const std::size_t screen_width, const std::size_t screen_height,
 
   // Create window
   std::cout << "Creating window\n";
-  window_ = std::make_unique<Window>(title, screen_width, screen_height);
+  window_ = std::make_unique<Window>(
+      title,
+      static_cast<uint32_t>(screen_width),
+      static_cast<uint32_t>(screen_height));
 
   // Create renderer
   std::cout << "Creating renderer\n";

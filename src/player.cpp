@@ -116,8 +116,8 @@ void Player::Render(const Renderer& renderer) const {
   const SDL_Rect hit_rect{
       static_cast<int>(position.x - (float)width_ * 0.5f),
       static_cast<int>(position.y - (float)height_ * 0.5f),
-      width_,
-      height_};
+      static_cast<int>(width_),
+      static_cast<int>(height_)};
   SDL_SetRenderDrawColor(renderer.GetSDLRenderer(), 0x00, 0xFF, 0x00, 0xFF);
   SDL_RenderDrawRect(renderer.GetSDLRenderer(), &hit_rect);
 }
