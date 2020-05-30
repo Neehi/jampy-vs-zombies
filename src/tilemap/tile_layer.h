@@ -8,10 +8,9 @@
 #include <string>
 #include <vector>
 
+#include "graphics/renderer.h"
 #include "tile.h"
 #include "tile_set.h"
-
-struct SDL_Renderer;
 
 // Represents a layer of fixed tiles. These tiles will be rendered as regular
 // sprites/textures as no interactions should occur with them - collisions
@@ -41,7 +40,7 @@ class TileLayer {
                const std::size_t row,
                const std::size_t tile_id);
 
-  void Render(SDL_Renderer* renderer);
+  void Render(const Renderer& renderer);
 
   // Debug
 

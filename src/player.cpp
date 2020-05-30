@@ -108,7 +108,7 @@ void Player::Update(const float delta) {
   HandleAnimation(delta);
 }
 
-void Player::Render(SDL_Renderer* renderer) const {
+void Player::Render(const Renderer& renderer) const {
   Sprite::Render(renderer);
 
   // Debug...
@@ -118,6 +118,6 @@ void Player::Render(SDL_Renderer* renderer) const {
       static_cast<int>(position.y - (float)height_ * 0.5f),
       width_,
       height_};
-  SDL_SetRenderDrawColor(renderer, 0x00, 0xFF, 0x00, 0xFF);
-  SDL_RenderDrawRect(renderer, &hit_rect);
+  SDL_SetRenderDrawColor(renderer.GetSDLRenderer(), 0x00, 0xFF, 0x00, 0xFF);
+  SDL_RenderDrawRect(renderer.GetSDLRenderer(), &hit_rect);
 }

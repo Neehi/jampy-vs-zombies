@@ -5,8 +5,7 @@
 #include <memory>
 #include <vector>
 
-#include <SDL.h>
-
+#include "graphics/renderer.h"
 #include "game_object.h"
 
 class GameObjectCollection {
@@ -14,7 +13,7 @@ class GameObjectCollection {
   void Add(std::shared_ptr<GameObject> game_object);
 
   void Update(const float delta);
-  void Render(SDL_Renderer* renderer);
+  void Render(const Renderer& renderer);
 
  private:
   std::vector<std::shared_ptr<GameObject>> game_objects_;

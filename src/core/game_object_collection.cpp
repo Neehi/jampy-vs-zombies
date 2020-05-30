@@ -20,7 +20,7 @@ void GameObjectCollection::Update(const float delta) {
   }
 }
 
-void GameObjectCollection::Render(SDL_Renderer* renderer) {
+void GameObjectCollection::Render(const Renderer& renderer) {
   // Render all game objects
   for (auto& game_object : game_objects_) {
     game_object->Render(renderer);

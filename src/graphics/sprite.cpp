@@ -1,6 +1,6 @@
 #include "sprite.h"
 
-void Sprite::Render(SDL_Renderer* renderer) const {
+void Sprite::Render(const Renderer& renderer) const {
   const Transform transform = GetTransform();
 
   float offset_x = offset_.x;
@@ -34,7 +34,7 @@ void Sprite::Render(SDL_Renderer* renderer) const {
 
   if (nullptr != texture_) {
     SDL_RenderCopyEx(
-        renderer,
+        renderer.GetSDLRenderer(),
         texture_,
         &src_rect_,
         &dst_rect,
@@ -44,19 +44,19 @@ void Sprite::Render(SDL_Renderer* renderer) const {
   }
 
   // Debug...
-  SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0x00, 0xFF);
-  SDL_RenderDrawRect(renderer, &dst_rect);
+  SDL_SetRenderDrawColor(renderer.GetSDLRenderer(), 0xFF, 0xFF, 0x00, 0xFF);
+  SDL_RenderDrawRect(renderer.GetSDLRenderer(), &dst_rect);
 
   if (offset_.x != 0 || offset_.y != 0) {
-    SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_SetRenderDrawColor(renderer.GetSDLRenderer(), 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderDrawLine(
-        renderer,
+        renderer.GetSDLRenderer(),
         dst_rect.x,
         dst_rect.y + -static_cast<int>(offset_y),
         dst_rect.x + dst_rect.w - 1,
         dst_rect.y + -static_cast<int>(offset_y));
     SDL_RenderDrawLine(
-        renderer,
+        renderer.GetSDLRenderer(),
         dst_rect.x + -static_cast<int>(offset_x),
         dst_rect.y,
         dst_rect.x + -static_cast<int>(offset_x),

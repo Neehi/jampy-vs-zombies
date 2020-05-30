@@ -11,8 +11,7 @@
 #include "core/game_state.h"
 #include "graphics/animation.h"
 #include "graphics/animation_player.h"
-
-struct SDL_Renderer;
+#include "graphics/renderer.h"
 
 enum class PlayerState { kIdle = 0, kWalk };
 
@@ -55,7 +54,7 @@ class Player : public GameObject {
   ~Player() = default;
 
   void Update(const float delta);
-  virtual void Render(SDL_Renderer* renderer) const override;
+  virtual void Render(const Renderer& renderer) const override;
 
  private:
   void HandleInput();

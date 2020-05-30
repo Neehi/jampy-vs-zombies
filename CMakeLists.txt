@@ -41,6 +41,8 @@ set(
     src/graphics/animation_player.h
     src/graphics/animation.h
     src/graphics/drawable.h
+    src/graphics/renderer.cpp
+    src/graphics/renderer.h
     src/graphics/sprite.cpp
     src/graphics/sprite.h
     src/graphics/transform.h

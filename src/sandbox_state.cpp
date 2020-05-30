@@ -41,10 +41,11 @@ const std::string SandboxState::id_ = "Sandbox";
 void SandboxState::OnEnter() {
   GameState::OnEnter();
   Window& window = GetGame().GetWindow();
+  Renderer& renderer = GetGame().GetRenderer();
   for (auto it = player_textures.begin(); it != player_textures.end(); it++) {
     AssetManager::Instance().LoadTexture(
         it->first, it->second,
-        GetGame().GetSDLRenderer());
+        renderer.GetSDLRenderer());
   }
   std::shared_ptr<GameObject> jampy =
       std::make_shared<Player>(this, "knight", 128, 128);
@@ -54,7 +55,7 @@ void SandboxState::OnEnter() {
   AssetManager::Instance().LoadTexture(
       "tileset",
       "tilesets/Tileset.png",
-      GetGame().GetSDLRenderer());
+      renderer.GetSDLRenderer());
   tile_set_ = std::make_shared<TileSet>("Sandbox", "tileset", 32, 32, 54, 9);
   std::cout << *tile_set_ << "\n";
   // Setup tile layer
@@ -81,7 +82,7 @@ void SandboxState::OnEnter() {
 
 void SandboxState::OnUpdate(const float delta) { game_objects_.Update(delta); }
 
-void SandboxState::OnRender(SDL_Renderer* renderer) {
+void SandboxState::OnRender(const Renderer& renderer) {
   game_objects_.Render(renderer);
   tile_layer_->Render(renderer);
 }

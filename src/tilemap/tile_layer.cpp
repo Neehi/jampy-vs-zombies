@@ -19,7 +19,7 @@ void TileLayer::SetTile(const std::size_t col,
   tile_grid_[row][col] = tile_id;
 }
 
-void TileLayer::Render(SDL_Renderer* renderer) {
+void TileLayer::Render(const Renderer& renderer) {
   std::size_t tile_id;
   glm::vec2 position;
 

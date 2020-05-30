@@ -8,8 +8,7 @@
 #include <string>
 #include <vector>
 
-#include <SDL.h>
-
+#include "graphics/renderer.h"
 #include "graphics/window.h"
 #include "input/input_manager.h"
 #include "game_state.h"
@@ -27,7 +26,7 @@ class Game {
   void SetGameState(std::shared_ptr<GameState> state);
 
   inline Window& GetWindow() const { return *window_; }
-  inline SDL_Renderer* GetSDLRenderer() const { return sdl_renderer_; }
+  inline Renderer& GetRenderer() const { return *renderer_; }
 
   inline std::uint32_t GetFPS() const { return fps_; }
 
@@ -44,7 +43,7 @@ class Game {
 
  private:
   std::unique_ptr<Window> window_;
-  SDL_Renderer* sdl_renderer_;
+  std::unique_ptr<Renderer> renderer_;
 
   uint32_t frame_rate_{kDefaultFrameRate};
   uint32_t fps_{0};

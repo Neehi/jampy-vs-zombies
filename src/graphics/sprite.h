@@ -6,6 +6,7 @@
 #include <SDL.h>
 
 #include "graphics/drawable.h"
+#include "graphics/renderer.h"
 #include "graphics/transformable.h"
 
 class Sprite : public Drawable, public Transformable {
@@ -33,7 +34,7 @@ class Sprite : public Drawable, public Transformable {
   inline void SetCentered(const bool center) { centered_ = center; }
   inline void SetFlipped(const bool flip) { flip_ = flip; }
 
-  virtual void Render(SDL_Renderer* renderer) const override;
+  virtual void Render(const Renderer& renderer) const override;
 
  private:
   SDL_Texture* texture_;

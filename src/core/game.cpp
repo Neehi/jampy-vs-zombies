@@ -26,17 +26,9 @@ Game::Game(const std::size_t screen_width, const std::size_t screen_height,
   std::cout << "Creating window\n";
   window_ = std::make_unique<Window>(title, screen_width, screen_height);
 
-  // Create SDL renderer
+  // Create renderer
   std::cout << "Creating renderer\n";
-  sdl_renderer_ = SDL_CreateRenderer(
-      window_->GetSDLWindow(),
-      -1,
-      SDL_RENDERER_ACCELERATED);
-
-  if (nullptr == sdl_renderer_) {
-    std::cerr << "Error creating renderer: " << SDL_GetError() << "\n";
-    // TODO: Error handling
-  }
+  renderer_ = std::make_unique<Renderer>(*window_);
 
   // Create input manager
   std::cout << "Creating input manager\n";
@@ -54,9 +46,11 @@ Game::~Game() {
   // Free any resources
   std::cout << "Cleaning up resources\n";
   AssetManager::Instance().Purge();
+  // Destroy renderer
+  std::cout << "Destroying renderer\n";
+  renderer_.reset();
   // Close window
   std::cout << "Closing window\n";
-  SDL_DestroyRenderer(sdl_renderer_);
   window_.reset();
   // Shutdown SDL_image
   std::cout << "Shutting down SDL_image\n";
@@ -89,17 +83,14 @@ void Game::Update(const float delta) {
 }
 
 void Game::Render() {
-  // Clear screen
-  SDL_SetRenderDrawColor(sdl_renderer_, 0xFF, 0, 0, SDL_ALPHA_OPAQUE);
-  SDL_RenderClear(sdl_renderer_);
+  renderer_->BeginScene();
 
   // Render current game state
   if (current_state_ != nullptr) {
-    current_state_->OnRender(sdl_renderer_);
+    current_state_->OnRender(*renderer_);
   }
 
-  // Update screen
-  SDL_RenderPresent(sdl_renderer_);
+  renderer_->EndScene();
 }
 
 void Game::Run() {

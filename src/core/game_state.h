@@ -6,6 +6,8 @@
 
 #include <SDL.h>
 
+#include "graphics/renderer.h"
+
 class Game;
 
 // GameState represents a stage of a game, i.e. title screen, main menu, pause,
@@ -20,7 +22,7 @@ class GameState {
 
   virtual void OnHandleEvent(const SDL_Event* event) = 0;
   virtual void OnUpdate(const float delta) = 0;
-  virtual void OnRender(SDL_Renderer* renderer) = 0;
+  virtual void OnRender(const Renderer& renderer) = 0;
 
   inline Game& GetGame() const { return *game_; }
 
