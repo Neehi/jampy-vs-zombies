@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-#include "core/game_state.h"
+#include "core/game_state_manager.h"
 #include "graphics/renderer.h"
 #include "graphics/window.h"
 #include "input/input_manager.h"
@@ -22,14 +22,13 @@ class Game {
 
   void Run();
 
-  void SetGameState(std::shared_ptr<GameState> state);
-
   inline Window& GetWindow() const { return *window_; }
   inline Renderer& GetRenderer() const { return *renderer_; }
 
   inline std::uint32_t GetFPS() const { return fps_; }
 
   inline InputManager& GetInputManager() const { return *input_manager_; }
+  inline GameStateManager& GetStateManager() const { return *state_manager_; }
 
  protected:
   void HandleEvents();
@@ -48,10 +47,9 @@ class Game {
   uint32_t fps_{0};
 
   std::unique_ptr<InputManager> input_manager_;
+  std::unique_ptr<GameStateManager> state_manager_;
 
   bool running_{false};
-
-  std::shared_ptr<GameState> current_state_{nullptr};
 };
 
 #endif  // CORE_GAME_H_

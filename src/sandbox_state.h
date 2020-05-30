@@ -17,7 +17,6 @@ class SandboxState : public GameState {
   using GameState::GameState;
 
   void OnEnter() override;
-  void OnHandleEvent(const SDL_Event* event) override {}
   void OnUpdate(const float delta) override;
   void OnRender(const Renderer& renderer) override;
   inline std::string GetID() const override { return id_; }

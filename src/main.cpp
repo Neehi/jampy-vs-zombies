@@ -6,7 +6,8 @@
 
 int main(int argc, char *argv[]) {
   Game* game = new Game(640, 480, "Jampy vs Zombies");
-  game->SetGameState(std::make_shared<SandboxState>(*game));
+  game->GetStateManager().AddState(std::make_shared<SandboxState>());
+  game->GetStateManager().SetActiveState("Sandbox");
   game->Run();
   delete game;
 

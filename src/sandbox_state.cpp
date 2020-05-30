@@ -41,8 +41,8 @@ const char* SandboxState::id_ = "Sandbox";
 
 void SandboxState::OnEnter() {
   GameState::OnEnter();
-  Window& window = GetGame().GetWindow();
-  Renderer& renderer = GetGame().GetRenderer();
+  Window& window = GetStateManager().GetGame().GetWindow();
+  Renderer& renderer = GetStateManager().GetGame().GetRenderer();
   for (auto it = player_textures.begin(); it != player_textures.end(); it++) {
     AssetManager::Instance().LoadTexture(
         it->first, it->second,

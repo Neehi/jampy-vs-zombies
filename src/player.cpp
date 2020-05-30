@@ -17,7 +17,7 @@ Player::Player(GameState* game_state, const std::string template_id,
     : GameObject(template_id, width, height),
       game_state_(game_state),
       dx_(60), dy_(0) {
-  Window& window = game_state->GetGame().GetWindow();
+  Window& window = game_state->GetStateManager().GetGame().GetWindow();
   GetTransform().SetPosition(
       glm::vec2(
           0 + static_cast<float>(width_) * 0.5f,
@@ -28,7 +28,8 @@ Player::Player(GameState* game_state, const std::string template_id,
 }
 
 void Player::HandleInput() {
-  const InputManager& input = game_state_->GetGame().GetInputManager();
+  const InputManager& input =
+      game_state_->GetStateManager().GetGame().GetInputManager();
 
   state_ = PlayerState::kIdle;
   direction_ = PlayerDirection::kNone;

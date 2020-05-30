@@ -30,6 +30,8 @@ set(
     src/core/game_object.h
     src/core/game_state.cpp
     src/core/game_state.h
+    src/core/game_state_manager.cpp
+    src/core/game_state_manager.h
     src/core/game.cpp
     src/core/game.h
 )

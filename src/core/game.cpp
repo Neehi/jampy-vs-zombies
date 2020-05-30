@@ -42,6 +42,10 @@ Game::Game(const std::size_t screen_width, const std::size_t screen_height,
   std::cout << "Creating asset manager\n";
   AssetManager::Instance();  // XXX: Doesn't need to be explicitly called
 
+  // Create game state manager
+  std::cout << "Creating game state manager\n";
+  state_manager_ = std::make_unique<GameStateManager>(*this);
+
   // Set game running
   running_ = true;
 }
@@ -80,20 +84,12 @@ void Game::HandleEvents() {
 }
 
 void Game::Update(const float delta) {
-  // Update current game state
-  if (current_state_ != nullptr) {
-    current_state_->OnUpdate(delta);
-  }
+  state_manager_->OnUpdate(delta);
 }
 
 void Game::Render() {
   renderer_->BeginScene();
-
-  // Render current game state
-  if (current_state_ != nullptr) {
-    current_state_->OnRender(*renderer_);
-  }
-
+  state_manager_->OnRender(*renderer_);
   renderer_->EndScene();
 }
 
@@ -147,19 +143,4 @@ void Game::Run() {
       SDL_Delay(1);
     }
   }
-}
-
-void Game::SetGameState(std::shared_ptr<GameState> state) {
-  if (current_state_ != nullptr) {
-    if (current_state_->GetID() == state->GetID()) {
-      std::cout << "GameState: '" << state->GetID()
-                << "' is already the current state\n";
-      return;
-    }
-    current_state_->OnExit();
-  }
-  std::cout << "GameState: Setting the current state to '" << state->GetID()
-            << "'\n";
-  current_state_ = state;
-  current_state_->OnEnter();
 }
