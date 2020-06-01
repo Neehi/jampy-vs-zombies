@@ -62,8 +62,8 @@ void Player::HandleMovement(const float delta) {
   // Check for collisions
   const float x1 = width_ * 0.5f;
   const float y1 = height_ * 0.5f;
-  const float x2 = 640 - width_ * 0.5f;
-  const float y2 = 640 - height_ * 0.5f;
+  const float x2 = (100 * 32) - width_ * 0.5f;
+  const float y2 = (100 * 32) - height_ * 0.5f;
   if (new_pos.x < x1) {
     new_pos.x = x1;
   } else if (new_pos.x > x2) {
@@ -72,6 +72,20 @@ void Player::HandleMovement(const float delta) {
 
   // Update player position
   GetTransform().SetPosition(new_pos);
+
+  // Update camera
+  const auto& camera = game_state_->GetGame().GetRenderer().GetCamera();
+  const glm::vec2 camera_size_2 = camera.GetViewportSize() * 0.5f;
+  glm::vec2 camera_pos = new_pos;
+  if (camera_pos.x - camera_size_2.x < 0)
+    camera_pos.x = camera_size_2.x;
+  if (camera_pos.x + camera_size_2.x > 100 * 32)
+    camera_pos.x = (100 * 32) - camera_size_2.x;
+  if (camera_pos.y - camera_size_2.y < 0)
+    camera_pos.y = camera_size_2.y;
+  if (camera_pos.y + camera_size_2.y > 480)
+    camera_pos.y = 480 - camera_size_2.y;
+  camera.GetTransform().SetPosition(camera_pos);
 }
 
 void Player::HandleAnimation(const float delta) {
@@ -113,7 +127,8 @@ void Player::Render(const Renderer& renderer) const {
   Sprite::Render(renderer);
 
   // Debug...
-  const glm::vec2 position =  GetTransform().GetPosition();
+  const auto camera = renderer.GetCamera();
+  const glm::vec2 position = camera.WorldToScreen(GetTransform().GetPosition());
   const SDL_Rect hit_rect{
       static_cast<int>(position.x - static_cast<float>(width_) * 0.5f),
       static_cast<int>(position.y - static_cast<float>(height_) * 0.5f),

@@ -2,6 +2,7 @@
 
 void Sprite::Render(const Renderer& renderer) const {
   const Transform transform = GetTransform();
+  const auto camera = renderer.GetCamera();
 
   float offset_x = offset_.x;
   float offset_y = offset_.y;
@@ -16,6 +17,9 @@ void Sprite::Render(const Renderer& renderer) const {
   const glm::vec2 p0 = transform.TransformPoint(b0);
   const glm::vec2 p2 = transform.TransformPoint(b2);
 
+  const glm::vec2 s0 = camera.WorldToScreen(p0);
+  const glm::vec2 s2 = camera.WorldToScreen(p2);
+
   offset_x *= transform.GetScale().x;
   offset_y *= transform.GetScale().y;
 
@@ -27,10 +31,10 @@ void Sprite::Render(const Renderer& renderer) const {
   const SDL_RendererFlip flip = flip_ ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
 
   SDL_Rect dst_rect = {
-      static_cast<int>(p0.x),
-      static_cast<int>(p0.y),
-      static_cast<int>(p2.x - p0.x),
-      static_cast<int>(p2.y - p0.y)};
+      static_cast<int>(s0.x),
+      static_cast<int>(s0.y),
+      static_cast<int>(s2.x - s0.x),
+      static_cast<int>(s2.y - s0.y)};
 
   if (nullptr != texture_) {
     SDL_RenderCopyEx(

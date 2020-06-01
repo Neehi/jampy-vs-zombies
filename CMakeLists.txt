@@ -43,6 +43,8 @@ set(
     src/graphics/animation_player.h
     src/graphics/animation.h
     src/graphics/drawable.h
+    src/graphics/orthographic_camera.cpp
+    src/graphics/orthographic_camera.h
     src/graphics/renderer.cpp
     src/graphics/renderer.h
     src/graphics/sprite.cpp

@@ -19,6 +19,14 @@ Renderer::Renderer(const Window& window)
               << SDL_GetError() << "\n";
     // TODO(Neehi): Error handling
   }
+
+  default_camera_ = std::make_unique<OrthographicCamera>(
+      window_->GetWidth(),
+      window_->GetHeight());
+  default_camera_->GetTransform().SetPosition(
+      glm::vec2(
+          static_cast<float>(window_->GetWidth()) * 0.5f,
+          static_cast<float>(window_->GetHeight()) * 0.5f));
 }
 
 Renderer::~Renderer() {
