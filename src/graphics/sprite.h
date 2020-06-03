@@ -20,7 +20,7 @@ class Sprite : public Drawable, public Transformable {
   inline const SDL_Rect& GetTextureRect() const { return src_rect_; }
   inline int GetWidth() const { return src_rect_.w; }
   inline int GetHeight() const { return src_rect_.h; }
-  inline const SDL_Rect& GetBounds() const {
+  inline const SDL_Rect GetBounds() const {
     return SDL_Rect{0, 0, src_rect_.w, src_rect_.h};
   }
   inline const glm::vec2& GetOffset() const { return offset_; }
