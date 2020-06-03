@@ -52,7 +52,7 @@ class Player : public GameObject {
          const std::size_t width, const std::size_t height);
   ~Player() = default;
 
-  void Update(const float delta);
+  void Update(const float delta) override;
   void Render(const Renderer& renderer) const override;
 
  private:
