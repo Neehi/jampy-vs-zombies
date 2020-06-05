@@ -1,3 +1,4 @@
+# TODO: Check required version
 cmake_minimum_required(VERSION 3.7)
 
 project(JampyVsZombies)
@@ -105,7 +106,7 @@ add_executable(
     ${TILEMAP_SOURCES}
 )
 
-## Define link libraries
+# Define link libraries
 string(STRIP "${SDL2_LIBRARIES}" SDL2_LIBRARIES)
 target_link_libraries(JampyVsZombies ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
