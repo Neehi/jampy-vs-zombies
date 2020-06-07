@@ -94,6 +94,9 @@ include_directories(
     ${SDL2_IMAGE_INCLUDE_DIRS}
     ${GLM_INCLUDE_DIRS}
 )
+if(APPLE)
+    include_directories(SYSTEM /usr/local/include/)
+endif(APPLE)
 
 # Define executable
 add_executable(
